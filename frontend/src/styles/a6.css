@@ -1,0 +1,15 @@
+.third_row { height:15px; background:#3b5998;}
+.demostyle {
+    background: #006bb4;
+    border: 1px solid #006bb4;
+    color: #fff;
+}
+
+#recaptcha {
+    display: inline-block;
+    position: relative;
+    margin-top:25px;
+  }
+  .rendered-form{
+  	margin-left: 2%;
+  }
