@@ -1116,6 +1116,7 @@
 }
 .header .offcanvas-body {
   padding: 0px 60px 30px 60px;
+  overflow-x: hidden;
 }
 @media (max-width: 768px) {
   .header .offcanvas-body {
@@ -1125,9 +1126,15 @@
 }
 .header .offcanvas-body .Menu .menu-grid {
   display: grid;
-  grid-template-columns: repeat(2, 451px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
+  .header .offcanvas-body .Menu .menu-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 769px) and (max-width: 991px) {
   .header .offcanvas-body .Menu .menu-grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -1160,7 +1167,8 @@
   margin-left: 20px;
 }
 .header .offcanvas-body .Menu .menu-grid .menu-content .menu-item {
-  width: fit-content;
+  width: 100%;
+  max-width: 420px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -1459,9 +1467,15 @@
 }
 .header-transparent .offcanvas-body .Menu .menu-grid {
   display: grid;
-  grid-template-columns: repeat(2, 451px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 @media (min-width: 992px) and (max-width: 1200px) {
+  .header-transparent .offcanvas-body .Menu .menu-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 769px) and (max-width: 991px) {
   .header-transparent .offcanvas-body .Menu .menu-grid {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -1494,7 +1508,8 @@
   margin-left: 20px;
 }
 .header-transparent .offcanvas-body .Menu .menu-grid .menu-content .menu-item {
-  width: fit-content;
+  width: 100%;
+  max-width: 420px;
   padding: 10px;
   border-radius: 10px;
 }
@@ -23895,7 +23910,7 @@ body.cms-about-us .page-title-wrapper {
 .solo-banner p {
     font-weight: 500 !important;
 }
-#toggleRows{
+/* #toggleRows{
    padding: 18px 47px;
 	font-size: clamp(14px, 1.2vw, 16px) !important;
 	font-weight: 800;
@@ -23904,6 +23919,29 @@ body.cms-about-us .page-title-wrapper {
 	border: none;
 	border-radius: 5px;
 	width: 264px;
+} */
+ /* Target the button specifically by ID to ensure styles stick */
+#toggleRows {
+    background-color: #262965 !important; /* Dark Blue from your theme */
+    color: white !important;           /* Yellow from your theme */
+    border: none;
+    border-radius: 4px;
+    padding: 17px 90px;                 /* Increased size: 12px top/bottom, 40px left/right */
+    font-size: 16px;                    /* Bigger text */
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+/* This prevents the color from changing when you click it (Show Less state) */
+#toggleRows:hover, 
+#toggleRows:focus, 
+#toggleRows:active {
+    background-color: #262965 !important;
+    color: white !important;
+    outline: none;
+    box-shadow: 0 4px 15px rgba(38, 41, 101, 0.2); /* Soft shadow instead of color change */
 }
 body.cms-home .banner_buttons + * {
     margin-top: 0 !important;   

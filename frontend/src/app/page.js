@@ -1,10 +1,11 @@
 "use client";
 import { useState, useCallback, useRef } from "react";
 import Link from 'next/link';
-import Footer from "@/components/Footer";
+
 import AddMemberModal from "@/components/AddMemberModal";
 import ClientInit from "@/components/ClientInit";
-import Header from "@/components/Header";
+
+
 
 // ─── Static Data ──────────────────────────────────────────────────────────────
 
@@ -12,70 +13,62 @@ const CALENDLY_LINK =
   "https://calendly.com/d/ckh2-xd6-qjd/benefits-conversation-with-hbg";
 
 const COVERAGE_TILES = [
-  ["tiles-card-1.png","Preventive Services","Routine checkups, screenings, labs, and immunizations fully covered before the deductible applies."],
-  ["tiles-card-2.png","Primary & Specialist Care","Nationwide access to 1.4M+ doctors, specialists, and providers through the Multiplan PHCS network."],
-  ["tiles-card-3.png","Emergency Care","Emergency services covered at any hospital, including international travel and urgent situations."],
-  ["tiles-card-4.png","Mental Health Services","Coverage for therapy, counseling, and psychiatry—both in-network and with out-of-network options."],
-  ["tiles-card-5.png","Inpatient Hospitalization & Surgeries","No annual or lifetime caps on covered inpatient hospital stays or major surgeries."],
-  ["tiles-card-6.png","Imaging & Advanced Diagnostics","X-rays, MRIs, CT scans, and diagnostic lab tests covered after meeting your deductible."],
-  ["tiles-card-7.png","Chiropractic Services","Includes coverage for outpatient rehab, physical therapy, and chiropractic care for qualifying conditions."],
-  ["tiles-card-8.png","Maternity & Newborn Care","Prenatal, childbirth, and newborn care covered after deductible with no lifetime limits."],
-  ["tiles-card-9.png","Pharmacy Benefits","Five-tier prescription coverage; preventive drugs at $0, copays apply after deductible for others."],
+  ["tiles-card-1.png", "Preventive Services", "Routine checkups, screenings, labs, and immunizations fully covered before the deductible applies."],
+  ["tiles-card-2.png", "Primary & Specialist Care", "Nationwide access to 1.4M+ doctors, specialists, and providers through the Multiplan PHCS network."],
+  ["tiles-card-3.png", "Emergency Care", "Emergency services covered at any hospital, including international travel and urgent situations."],
+  ["tiles-card-4.png", "Mental Health Services", "Coverage for therapy, counseling, and psychiatry—both in-network and with out-of-network options."],
+  ["tiles-card-5.png", "Inpatient Hospitalization & Surgeries", "No annual or lifetime caps on covered inpatient hospital stays or major surgeries."],
+  ["tiles-card-6.png", "Imaging & Advanced Diagnostics", "X-rays, MRIs, CT scans, and diagnostic lab tests covered after meeting your deductible."],
+  ["tiles-card-7.png", "Chiropractic Services", "Includes coverage for outpatient rehab, physical therapy, and chiropractic care for qualifying conditions."],
+  ["tiles-card-8.png", "Maternity & Newborn Care", "Prenatal, childbirth, and newborn care covered after deductible with no lifetime limits."],
+  ["tiles-card-9.png", "Pharmacy Benefits", "Five-tier prescription coverage; preventive drugs at $0, copays apply after deductible for others."],
 ];
 
 const JOIN_STEPS = [
-  ["1.","Calculate Your Health Plan Cost","Enter your zip code, age, and household details including any dependents—to view rates for your business-of-one."],
-  ["2.","Select Your Plan Design","Choose from three deductible levels $2,500, $5,000, or $10,000. HSA options are available."],
-  ["3.","Complete Health Questionnaire & Sign Docs","Complete a secure medical eligibility questionnaire, then sign your plan documents to confirm enrollment."],
-  ["4.","Manage Your Plan Online","After your first payment is processed, access ID cards, benefits, claims, and documents in your secure member portal."],
+  ["1.", "Calculate Your Health Plan Cost", "Enter your zip code, age, and household details including any dependents—to view rates for your business-of-one."],
+  ["2.", "Select Your Plan Design", "Choose from three deductible levels $2,500, $5,000, or $10,000. HSA options are available."],
+  ["3.", "Complete Health Questionnaire & Sign Docs", "Complete a secure medical eligibility questionnaire, then sign your plan documents to confirm enrollment."],
+  ["4.", "Manage Your Plan Online", "After your first payment is processed, access ID cards, benefits, claims, and documents in your secure member portal."],
 ];
 
 const TESTIMONIALS_ROW1 = [
-  ["Meghan H, Nurse","Every Solo team member I spoke with was knowledgeable, patient and genuinely helpful. They took the time to walk me through my options, answer all my questions, and made sure I felt confident in my decision. It's rare to find a company that combines professionalism with such a personal touch."],
-  ["Lauren S, Video Producer","As a freelancer/small business owner finding adequate coverage has always been difficult. Solo Health Collective made everything easy to understand, and what really stood out was how far their team went to help."],
-  ["Toby W, Talent Manager","I've been a member of Solo for a coming for two years now! It has been a great experience generally, it has reduced our monthly costs a lot and given us a wider network of providers to see. I also love how it is HSA eligible."],
-  ["Frances D, Member","I actually feel like I have an ally in navigating the complexity of insurance and the whole medical ecosystem. It it truly so appreciated to know that when I send an email it is not going into the void. Thank you!"],
-  ["Hayley L, Photographer","Very easy to work with, quick responses & great coverage. Would highly recommend to any other entrepreneurs!"],
-  ["Sam C, Irrigation Specialist","We've been on the plan for over 2 years and are very satisfied with the service. Highly recommend to all my fellow small business owners!"],
+  ["Meghan H, Nurse", "Every Solo team member I spoke with was knowledgeable, patient and genuinely helpful. They took the time to walk me through my options, answer all my questions, and made sure I felt confident in my decision. It's rare to find a company that combines professionalism with such a personal touch."],
+  ["Lauren S, Video Producer", "As a freelancer/small business owner finding adequate coverage has always been difficult. Solo Health Collective made everything easy to understand, and what really stood out was how far their team went to help."],
+  ["Toby W, Talent Manager", "I've been a member of Solo for a coming for two years now! It has been a great experience generally, it has reduced our monthly costs a lot and given us a wider network of providers to see. I also love how it is HSA eligible."],
+  ["Frances D, Member", "I actually feel like I have an ally in navigating the complexity of insurance and the whole medical ecosystem. It it truly so appreciated to know that when I send an email it is not going into the void. Thank you!"],
+  ["Hayley L, Photographer", "Very easy to work with, quick responses & great coverage. Would highly recommend to any other entrepreneurs!"],
+  ["Sam C, Irrigation Specialist", "We've been on the plan for over 2 years and are very satisfied with the service. Highly recommend to all my fellow small business owners!"],
 ];
 
 const TESTIMONIALS_ROW2 = [
-  ["Larissa M, Strategist","Great customer experience, easy to sign up and manage care, and much wider provider coverage than the state marketplace plan I was on previously"],
-  ["Karen E, Member","Allison and Brian were incredibly responsive and helpful when we signed up for Solo Health Collective. They went above and beyond, making time for phone calls whenever we had questions. Highly recommend!"],
-  ["Justin M, Executive Coach","I had a great experience with HBG and their insurance product Solo. It saved us thousands this year on health coverage. Has been a game changer for us."],
-  ["Frankie B, Real Estate Agent","I have had the best experience with Solo!!! Signing up was super easy and the team is always quick to get back to me on any questions or concerns I have. Highly recommend!! :)"],
-  ["Drew A, Food Photographer & Stylist","As a small business owner that went without health care for YEARS, I am thankful for HBG for being affordable and caring. Please don't go anywhere"],
-  ["Meghan H, Nurse","Every Solo team member I spoke with was knowledgeable, patient and genuinely helpful. They took the time to walk me through my options, answer all my questions, and made sure I felt confident in my decision."],
+  ["Larissa M, Strategist", "Great customer experience, easy to sign up and manage care, and much wider provider coverage than the state marketplace plan I was on previously"],
+  ["Karen E, Member", "Allison and Brian were incredibly responsive and helpful when we signed up for Solo Health Collective. They went above and beyond, making time for phone calls whenever we had questions. Highly recommend!"],
+  ["Justin M, Executive Coach", "I had a great experience with HBG and their insurance product Solo. It saved us thousands this year on health coverage. Has been a game changer for us."],
+  ["Frankie B, Real Estate Agent", "I have had the best experience with Solo!!! Signing up was super easy and the team is always quick to get back to me on any questions or concerns I have. Highly recommend!! :)"],
+  ["Drew A, Food Photographer & Stylist", "As a small business owner that went without health care for YEARS, I am thankful for HBG for being affordable and caring. Please don't go anywhere"],
+  ["Meghan H, Nurse", "Every Solo team member I spoke with was knowledgeable, patient and genuinely helpful. They took the time to walk me through my options, answer all my questions, and made sure I felt confident in my decision."],
 ];
 
 const FAQ_ITEMS = [
-  { id:"collapseOne", question:"What does it mean to establish a Solo plan?", answer:"Your business creates a self-funded major medical health plan for its sole employee—you. As the plan sponsor, your business funds the coverage, and Solo provides the administrative infrastructure, network access, and partner services to make it work." },
-  { id:"collapseTwo", question:"When should I establish my plan?", itemId:"ques2", answer:"We recommend setting up your Solo plan by the 20th of the month prior to your desired start date. Creating your plan earlier allows time for administrative setup and coordination with partner services (Claims Admin, Rx, Telemedicine etc.) before your coverage begins.<br/><br/>If you miss the 20th, that's okay - plans can still be set up through the end of the month for coverage that starts on the 1st of the following month. Plans created later in the month may simply require additional processing time before all services are fully active.<br/><br/>Your first payment isn't due until your plan's effective date, so there's no downside to setting up your plan early." },
-  { id:"collapseThree", question:"Is Solo a PPO health plan? Can I choose my doctor?", answer:"Yes. Solo uses the Multiplan PHCS Network with 1.4M+ providers nationwide. You have the freedom to choose any doctor, specialist, or hospital within the network. You can also see out-of-network providers, though your cost-sharing may be higher." },
-  { id:"collapseFour", question:"What benefits are included?", answer:"Solo offers comprehensive major medical coverage including: Preventive care (fully covered before deductible), Primary and specialist visits, Emergency care at any hospital, Mental health and therapy, Inpatient hospitalization and surgeries, Imaging and diagnostics, Chiropractic and rehabilitation services, Maternity and newborn care, and a five-tier pharmacy benefit program." },
-  { id:"collapseFive", question:"Can I add my spouse or dependents?", answer:"Yes. You can add eligible family members including a spouse or partner and dependent children under age 26. Family members can be added during initial enrollment or at qualifying life events." },
-  { id:"collapseSix", question:"How do I get help choosing a plan?", answer:"Our team can review your needs and walk you through your options. Book a call using the Calendly link or use the quote tool on this page to see real monthly costs." },
+  { id: "collapseOne", question: "What does it mean to establish a Solo plan?", answer: "Your business creates a self-funded major medical health plan for its sole employee—you. As the plan sponsor, your business funds the coverage, and Solo provides the administrative infrastructure, network access, and partner services to make it work." },
+  { id: "collapseTwo", question: "When should I establish my plan?", itemId: "ques2", answer: "We recommend setting up your Solo plan by the 20th of the month prior to your desired start date. Creating your plan earlier allows time for administrative setup and coordination with partner services (Claims Admin, Rx, Telemedicine etc.) before your coverage begins.<br/><br/>If you miss the 20th, that's okay - plans can still be set up through the end of the month for coverage that starts on the 1st of the following month. Plans created later in the month may simply require additional processing time before all services are fully active.<br/><br/>Your first payment isn't due until your plan's effective date, so there's no downside to setting up your plan early." },
+  { id: "collapseThree", question: "Is Solo a PPO health plan? Can I choose my doctor?", answer: "Yes. Solo uses the Multiplan PHCS Network with 1.4M+ providers nationwide. You have the freedom to choose any doctor, specialist, or hospital within the network. You can also see out-of-network providers, though your cost-sharing may be higher." },
+  { id: "collapseFour", question: "What benefits are included?", answer: "Solo offers comprehensive major medical coverage including: Preventive care (fully covered before deductible), Primary and specialist visits, Emergency care at any hospital, Mental health and therapy, Inpatient hospitalization and surgeries, Imaging and diagnostics, Chiropractic and rehabilitation services, Maternity and newborn care, and a five-tier pharmacy benefit program." },
+  { id: "collapseFive", question: "Can I add my spouse or dependents?", answer: "Yes. You can add eligible family members including a spouse or partner and dependent children under age 26. Family members can be added during initial enrollment or at qualifying life events." },
+  { id: "collapseSix", question: "How do I get help choosing a plan?", answer: "Our team can review your needs and walk you through your options. Book a call using the Calendly link or use the quote tool on this page to see real monthly costs." },
 ];
 
-// const SIDEBAR_SECTIONS = [
-//   { title:"Plans and Coverage", icon:"paln-img.png", links:[{ href:"/plan-summary", label:"Plan Summary", cls:"custom-border-1" },{ href:"/faq", label:"Policy FAQ" }] },
-//   { title:"Our Network", icon:"network.png", links:[{ href:"/our-network", label:"Find a Doctor" }] },
-//   { title:"Member Services", icon:"member.png", links:[{ href:"/member-services", label:"Manage your Portal" }] },
-//   { title:"Resources", icon:"resource.png", links:[{ href:"/how-it-works", label:"How it Works" },{ href:"/resource-articles", label:"Resource Articles", cls:"custom-border" },{ href:"/preventive-care", label:"Preventive Care Guide", cls:"custom-border-1" },{ href:"/mental-health", label:"Mental Health & Wellness", cls:"custom-border-1" },{ href:"/emergency-care-benefits", label:"Emergency Care Benefits" }] },
-//   { title:"About us", icon:"member.png", links:[{ href:"/about-us", label:"Company" },{ href:"/about-us#license", label:"Licensing" }] },
-//   { title:"Contact Us", icon:"conatctus.png", links:[{ href:CALENDLY_LINK, label:"Schedule a consult", external:true },{ href:"/contact#partner", label:"Partner with us", cls:"custom-border" },{ href:"/contact#feedback", label:"Leave us feedback" }] },
-// ];
 
 const PARTNER_LOGOS = [
-  ["ascension-logo.jpg","Ascension"],["1920px-Stony_Brook_Medicine_logo.svg_.png","Stony Brook"],
-  ["HCA_Healthcare_Logo.jpg","HCA"],["Mayo-Clinic-Emblem.jpg","Mayo Clinic"],
-  ["NYU_Langone_Health_Logo.jpg","NYU Langone"],["newyork-removebg-preview.png","NewYork-Presbyterian"],
+  ["ascension-logo.jpg", "Ascension"], ["1920px-Stony_Brook_Medicine_logo.svg_.png", "Stony Brook"],
+  ["HCA_Healthcare_Logo.jpg", "HCA"], ["Mayo-Clinic-Emblem.jpg", "Mayo Clinic"],
+  ["NYU_Langone_Health_Logo.jpg", "NYU Langone"], ["newyork-removebg-preview.png", "NewYork-Presbyterian"],
 ];
 
 const PRICING_PLANS = [
-  { value:"10000", price:"$29.00", deductible:"$10,000", familyDeductible:"$20,000 deductible per family", planClass:"plan1" },
-  { value:"5000",  price:"$49.00", deductible:"$5,000",  familyDeductible:"$10,000 deductible per family", planClass:"plan2", popular:true },
-  { value:"2500",  price:"$69.00", deductible:"$2,500",  familyDeductible:"$5,000 deductible per family",  planClass:"plan3" },
+  { value: "10000", price: "$29.00", deductible: "$10,000", familyDeductible: "$20,000 deductible per family", planClass: "plan1" },
+  { value: "5000", price: "$49.00", deductible: "$5,000", familyDeductible: "$10,000 deductible per family", planClass: "plan2", popular: true },
+  { value: "2500", price: "$69.00", deductible: "$2,500", familyDeductible: "$5,000 deductible per family", planClass: "plan3" },
 ];
 
 // ─── Home Component ───────────────────────────────────────────────────────────
@@ -83,45 +76,45 @@ const PRICING_PLANS = [
 export default function Home() {
 
   // ── UI state ──────────────────────────────────────────────────────────────
-  const [showModal,           setShowModal]           = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [notificationVisible, setNotificationVisible] = useState(true);
-  const [coverageSlide,       setCoverageSlide]       = useState(0);
-  const [joinSlide,           setJoinSlide]           = useState(0);
-  const [openFaq,             setOpenFaq]             = useState("collapseOne");
-  const [sidebarOpen,         setSidebarOpen]         = useState({ 0: true });
-  const [pricingVisible,      setPricingVisible]      = useState(false);
+  const [coverageSlide, setCoverageSlide] = useState(0);
+  const [joinSlide, setJoinSlide] = useState(0);
+  const [openFaq, setOpenFaq] = useState("collapseOne");
+  const [sidebarOpen, setSidebarOpen] = useState({ 0: true });
+  const [pricingVisible, setPricingVisible] = useState(false);
   const [desktopPopupVisible, setDesktopPopupVisible] = useState(false);
-  const [mobileQuoteVisible,  setMobileQuoteVisible]  = useState(false);
-  const [selectedPlan,        setSelectedPlan]        = useState("5000");
+  const [mobileQuoteVisible, setMobileQuoteVisible] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState("5000");
 
   // ── Quote form state ──────────────────────────────────────────────────────
-  const [quoteZip,       setQuoteZip]       = useState("");
-  const [quoteDob,       setQuoteDob]       = useState("");
-  const [quoteGender,    setQuoteGender]    = useState("");
+  const [quoteZip, setQuoteZip] = useState("");
+  const [quoteDob, setQuoteDob] = useState("");
+  const [quoteGender, setQuoteGender] = useState("");
   const [quoteFirstname, setQuoteFirstname] = useState("");
-  const [quoteEmail,     setQuoteEmail]     = useState("");
-  const [quotePhone,     setQuotePhone]     = useState("");
-  const [privacyAck,     setPrivacyAck]     = useState(false);
+  const [quoteEmail, setQuoteEmail] = useState("");
+  const [quotePhone, setQuotePhone] = useState("");
+  const [privacyAck, setPrivacyAck] = useState(false);
   const [marketingConsent, setMarketingConsent] = useState(false);
-  const [ratesEmail,     setRatesEmail]     = useState("");
+  const [ratesEmail, setRatesEmail] = useState("");
 
   // ── Desktop popup spouse/children ─────────────────────────────────────────
-  const [hasSpouseDesktop,    setHasSpouseDesktop]    = useState(false);
+  const [hasSpouseDesktop, setHasSpouseDesktop] = useState(false);
   const [spouseGenderDesktop, setSpouseGenderDesktop] = useState("");
-  const [spouseDobDesktop,    setSpouseDobDesktop]    = useState("");
-  const [hasChildrenDesktop,  setHasChildrenDesktop]  = useState(false);
-  const [childCountDesktop,   setChildCountDesktop]   = useState("");
+  const [spouseDobDesktop, setSpouseDobDesktop] = useState("");
+  const [hasChildrenDesktop, setHasChildrenDesktop] = useState(false);
+  const [childCountDesktop, setChildCountDesktop] = useState("");
 
   // ── Mobile popup spouse/children ──────────────────────────────────────────
-  const [hasSpouseMobile,    setHasSpouseMobile]    = useState(false);
+  const [hasSpouseMobile, setHasSpouseMobile] = useState(false);
   const [spouseGenderMobile, setSpouseGenderMobile] = useState("");
-  const [spouseDobMobile,    setSpouseDobMobile]    = useState("");
-  const [hasChildrenMobile,  setHasChildrenMobile]  = useState(false);
-  const [childCountMobile,   setChildCountMobile]   = useState("");
+  const [spouseDobMobile, setSpouseDobMobile] = useState("");
+  const [hasChildrenMobile, setHasChildrenMobile] = useState(false);
+  const [childCountMobile, setChildCountMobile] = useState("");
 
   // ── Touch refs ─────────────────────────────────────────────────────────────
   const coverageTouchStart = useRef(0);
-  const joinTouchStart     = useRef(0);
+  const joinTouchStart = useRef(0);
 
   // ── Handlers ──────────────────────────────────────────────────────────────
 
@@ -131,6 +124,7 @@ export default function Home() {
     if (!checked) { setShowModal(false); return; }
     if (!quoteZip || !quoteDob || !quoteGender) {
       // silently reject — toggle stays off
+      alert("Please enter your Location, Date of Birth, and Gender details first.");
       e.preventDefault();
       return;
     }
@@ -143,14 +137,14 @@ export default function Home() {
     }
   }, [quoteZip, quoteDob, quoteGender]);
 
-  const handleGetQuote            = useCallback(() => setPricingVisible(true),  []);
-  const handleRecalculate         = useCallback(() => setPricingVisible(false), []);
-  const handlePlanSelect          = useCallback((v) => setSelectedPlan((p) => p === v ? "" : v), []);
-  const handleFaqToggle           = useCallback((id) => setOpenFaq((p) => p === id ? null : id), []);
-  const handleToggleSidebar       = useCallback((i) => setSidebarOpen((prev) => { const n={}; Object.keys(prev).forEach(k=>{ n[k]=false; }); n[i]=!prev[i]; return n; }), []);
-  const handleDesktopPopupCancel  = useCallback(() => { setDesktopPopupVisible(false); setShowModal(false); }, []);
-  const handleDesktopPopupContinue= useCallback(() => { setDesktopPopupVisible(false); setPricingVisible(true); }, []);
-  const handleMobilePopupCancel   = useCallback(() => { setMobileQuoteVisible(false); setShowModal(false); }, []);
+  const handleGetQuote = useCallback(() => setPricingVisible(true), []);
+  const handleRecalculate = useCallback(() => setPricingVisible(false), []);
+  const handlePlanSelect = useCallback((v) => setSelectedPlan((p) => p === v ? "" : v), []);
+  const handleFaqToggle = useCallback((id) => setOpenFaq((p) => p === id ? null : id), []);
+  const handleToggleSidebar = useCallback((i) => setSidebarOpen((prev) => { const n = {}; Object.keys(prev).forEach(k => { n[k] = false; }); n[i] = !prev[i]; return n; }), []);
+  const handleDesktopPopupCancel = useCallback(() => { setDesktopPopupVisible(false); setShowModal(false); }, []);
+  const handleDesktopPopupContinue = useCallback(() => { setDesktopPopupVisible(false); setPricingVisible(true); }, []);
+  const handleMobilePopupCancel = useCallback(() => { setMobileQuoteVisible(false); setShowModal(false); }, []);
   const handleMobilePopupContinue = useCallback(() => { setMobileQuoteVisible(false); setPricingVisible(true); }, []);
 
   // FAQ banner — passed to ClientInit so it can wire up the DOM link safely
@@ -159,7 +153,7 @@ export default function Home() {
     setOpenFaq("collapseTwo");
     setTimeout(() => {
       const el = document.getElementById("ques2");
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 200, behavior:"smooth" });
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 200, behavior: "smooth" });
     }, 100);
   }, []);
 
@@ -167,23 +161,30 @@ export default function Home() {
     if (!ratesEmail) return;
     try {
       await fetch("https://jsonplaceholder.typicode.com/posts", {
-        method:"POST", headers:{"Content-Type":"application/json"},
-        body: JSON.stringify({ email:ratesEmail, zip:quoteZip, dob:quoteDob, gender:quoteGender, selectedPlan }),
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: ratesEmail, zip: quoteZip, dob: quoteDob, gender: quoteGender, selectedPlan }),
       });
     } catch (err) { console.error("Send rates error:", err); }
   }, [ratesEmail, quoteZip, quoteDob, quoteGender, selectedPlan]);
 
   // Slider touches
   const handleCoverageTouchStart = useCallback((e) => { coverageTouchStart.current = e.touches[0].clientX; }, []);
-  const handleCoverageTouchEnd   = useCallback((e) => {
+  const handleCoverageTouchEnd = useCallback((e) => {
     const diff = coverageTouchStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) setCoverageSlide((p) => diff > 0 ? (p+1) % COVERAGE_TILES.length : (p-1+COVERAGE_TILES.length) % COVERAGE_TILES.length);
+    if (Math.abs(diff) > 40) setCoverageSlide((p) => diff > 0 ? (p + 1) % COVERAGE_TILES.length : (p - 1 + COVERAGE_TILES.length) % COVERAGE_TILES.length);
   }, []);
   const handleJoinTouchStart = useCallback((e) => { joinTouchStart.current = e.touches[0].clientX; }, []);
-  const handleJoinTouchEnd   = useCallback((e) => {
+  const handleJoinTouchEnd = useCallback((e) => {
     const diff = joinTouchStart.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) setJoinSlide((p) => diff > 0 ? (p+1) % JOIN_STEPS.length : (p-1+JOIN_STEPS.length) % JOIN_STEPS.length);
+    if (Math.abs(diff) > 40) setJoinSlide((p) => diff > 0 ? (p + 1) % JOIN_STEPS.length : (p - 1 + JOIN_STEPS.length) % JOIN_STEPS.length);
   }, []);
+
+   const formatDob = (raw) => {
+    let v = raw.replace(/\D/g, "");
+    if (v.length > 2 && v.length <= 4) v = v.slice(0, 2) + "/" + v.slice(2);
+    else if (v.length > 4) v = v.slice(0, 2) + "/" + v.slice(2, 4) + "/" + v.slice(4, 8);
+    return v;
+  };
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
@@ -191,11 +192,7 @@ export default function Home() {
       {/* ClientInit handles all DOM-dependent side-effects after hydration */}
       <ClientInit onFaqBannerClick={handleFaqBannerClick} />
 
-      {/* ─── HEADER ─── */}
-     <Header
-  sidebarOpen={sidebarOpen}
-  handleToggleSidebar={handleToggleSidebar}
-/>
+      
 
       {/* ─── NOTIFICATION BAR ─── */}
       {notificationVisible && (
@@ -206,12 +203,12 @@ export default function Home() {
               <div className="solo-banner">
                 <p className="m-0 text-white fw-normal text-center fs-14">
                   {/* href is handled by ClientInit via DOM event */}
-                  <Link href="#faqAccordion" style={{ color:"#fff" }}>
+                  <Link href="#faqAccordion" style={{ color: "#fff" }}>
                     Set up your plan by the 20th to ensure plan and partner services are activated on time for your upcoming coverage month - click to learn more
                   </Link>
                 </p>
               </div>
-              <div style={{ cursor:"pointer" }} onClick={() => setNotificationVisible(false)}>
+              <div style={{ cursor: "pointer" }} onClick={() => setNotificationVisible(false)}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4.47138 3.5286C4.21103 3.26825 3.78892 3.26825 3.52858 3.5286C3.26823 3.78895 3.26823 4.21106 3.52858 4.47141L7.05718 8.00001L3.52859 11.5286C3.26824 11.7889 3.26824 12.2111 3.52859 12.4714C3.78894 12.7318 4.21105 12.7318 4.4714 12.4714L7.99999 8.94282L11.5286 12.4714C11.7889 12.7318 12.211 12.7318 12.4714 12.4714C12.7317 12.2111 12.7317 11.789 12.4714 11.5286L8.9428 8.00001L12.4714 4.47141C12.7318 4.21106 12.7318 3.78895 12.4714 3.5286C12.2111 3.26825 11.7889 3.26825 11.5286 3.5286L7.99999 7.0572L4.47138 3.5286Z" fill="white" /></svg>
               </div>
             </div>
@@ -224,10 +221,10 @@ export default function Home() {
         <div className="hero-bg">
           <div className="custom-container">
             <video autoPlay muted loop playsInline className="hero-video">
-              <source src="https://hbgsolo.com/media/video1.mp4" type="video/mp4" />
+              <source src="/videos/video1.mp4" type="video/mp4" />
             </video>
             <div className="solo-logo">
-              <img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/hero--banner-logo.png" alt="solo_img" />
+              <img src="/images/hero--banner-logo.png" alt="solo_img" />
             </div>
             <div>
               <div className="hero-p">
@@ -246,7 +243,7 @@ export default function Home() {
         <div className="stats-section">
           <div className="custom-container">
             <div className="d-flex flex-column flex-md-row gap-3">
-              <div className="stats-card shadow" data-aos="fade-up" data-aos-delay="200"><div data-aos="fade-up" data-aos-delay="800"><h2 className="counter">1,000+</h2><p className="label">SELF-EMPLOYED</p><span>Businesses &amp; Growing</span></div></div>
+              <div className="stats-card shadow" data-aos="fade-up" data-aos-delay="200"><div data-aos="fade-up" data-aos-delay="800"><h2 className="counter">2,000+</h2><p className="label">SELF-EMPLOYED</p><span>Businesses &amp; Growing</span></div></div>
               <div className="stats-card shadow" data-aos="fade-up" data-aos-delay="800"><div data-aos="fade-up" data-aos-delay="1400"><h2 className="counter">$4.2+</h2><p className="label">MILLION</p><span>In Collective Member Savings</span></div></div>
               <div className="stats-card shadow" data-aos="fade-up" data-aos-delay="1200"><div data-aos="fade-up" data-aos-delay="1600"><h2 className="counter">1M+</h2><p className="label">IN-NETWORK</p><span>Healthcare Practitioners Nationwide</span></div></div>
             </div>
@@ -255,7 +252,7 @@ export default function Home() {
         <section className="stats-carousel">
           <div className="outer">
             <div className="owl-carousel stats-owl">
-              <div className="stats-card shadow-sm"><h2 className="counter">1,000+</h2><p className="label">SELF-EMPLOYED</p><span>Businesses &amp; Growing</span></div>
+              <div className="stats-card shadow-sm"><h2 className="counter">2,000+</h2><p className="label">SELF-EMPLOYED</p><span>Businesses &amp; Growing</span></div>
               <div className="stats-card shadow-sm"><h2 className="counter">$4.2+</h2><p className="label">MILLION</p><span>In Collective Member Savings</span></div>
               <div className="stats-card shadow-sm"><h2 className="counter">1M+</h2><p className="label">IN-NETWORK</p><span>Healthcare Practitioners Nationwide</span></div>
             </div>
@@ -274,7 +271,7 @@ export default function Home() {
         <div className="custom-container">
           <div className="about-content">
             <div className="d-none d-lg-block">
-              <img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/arrow-right.png" alt="right-arrow" />
+              <img src="/images/arrow-right.png" alt="right-arrow" />
             </div>
             <div>
               <div className="animated-text">
@@ -306,7 +303,7 @@ export default function Home() {
                 {COVERAGE_TILES.map(([img, title, desc], i) => (
                   <div className={`slide${i === coverageSlide ? " active" : ""}`} key={i}>
                     <div className="coverage-tiles">
-                      <div className="tile-image"><img className="slider-logos" src={`https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/${img}`} alt={title} /></div>
+                      <div className="tile-image"><img className="slider-logos" src={`/images/${img}`} alt={title} /></div>
                       <div><p className="tiles-title">{title}</p><p className="tiles-subtitle">{desc}</p></div>
                     </div>
                   </div>
@@ -358,7 +355,7 @@ export default function Home() {
                     <label className="form-label">What&apos;s your date of birth?*</label>
                     <div className="input-card-1 d-flex align-items-center">
                       <div><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M7 2C7.55228 2 8 2.44772 8 3V4H16V3C16 2.44772 16.4477 2 17 2C17.5523 2 18 2.44772 18 3V4H19C20.6569 4 22 5.34315 22 7V19C22 20.6569 20.6569 22 19 22H5C3.34315 22 2 20.6569 2 19V7C2 5.34315 3.34315 4 5 4H6V3C6 2.44772 6.44772 2 7 2ZM16 6V7C16 7.55228 16.4477 8 17 8C17.5523 8 18 7.55228 18 7V6H19C19.5523 6 20 6.44771 20 7V10H4V7C4 6.44772 4.44772 6 5 6H6V7C6 7.55228 6.44772 8 7 8C7.55228 8 8 7.55228 8 7V6H16ZM4 12V19C4 19.5523 4.44772 20 5 20H19C19.5523 20 20 19.5523 20 19V12H4Z" fill="#262965" /></svg></div>
-                      <input type="date" className="form-control border-0 shadow-none" placeholder="MM/DD/YYYY" value={quoteDob} onChange={(e) => setQuoteDob(e.target.value)} />
+                      <input type="text" className="form-control border-0 shadow-none" placeholder="MM/DD/YYYY" value={quoteDob} onChange={(e) => setQuoteDob(formatDob(e.target.value)   )} />
                     </div>
                   </div>
                   {/* Gender */}
@@ -432,8 +429,8 @@ export default function Home() {
                 {showModal && (
                   <AddMemberModal
                     closeModal={() => setShowModal(false)}
-                    onSave={() => {}}
-                    quoteData={{ zip:quoteZip, dob:quoteDob, gender:quoteGender, firstname:quoteFirstname, email:quoteEmail, phone:quotePhone }}
+                    onSave={() => { }}
+                    quoteData={{ zip: quoteZip, dob: quoteDob, gender: quoteGender, firstname: quoteFirstname, email: quoteEmail, phone: quotePhone }}
                   />
                 )}
 
@@ -533,7 +530,7 @@ export default function Home() {
             <div className="custom-container">
               <div className="row d-flex justify-content-center">
                 <div className="col-12 col-md-6">
-                  <div onClick={handleMobilePopupCancel} style={{ cursor:"pointer" }}>
+                  <div onClick={handleMobilePopupCancel} style={{ cursor: "pointer" }}>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M10.7071 17.7929C11.0976 18.1834 11.0976 18.8166 10.7071 19.2071C10.3166 19.5976 9.68339 19.5976 9.29286 19.2071L3.49997 13.4142C2.71892 12.6332 2.71892 11.3668 3.49997 10.5858L9.29286 4.79289C9.68339 4.40237 10.3166 4.40237 10.7071 4.79289C11.0976 5.18342 11.0976 5.81658 10.7071 6.20711L5.91419 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H5.91418L10.7071 17.7929Z" fill="#262965" /></svg>
                   </div>
                   <div className="custom-modal">
@@ -550,13 +547,13 @@ export default function Home() {
                       <>
                         <div className="row py-4">
                           <p className="form-label fw-bold fs-16 text-primary text-center text-uppercase">What is your spouse gender*</p>
-                          <div className="col-6"><div className="gender-card mobile d-flex align-items-center gap-2"><input type="radio" name="spouseGenderMobile" className="form-check-input-1 m-0" value="Male" checked={spouseGenderMobile==="Male"} onChange={() => setSpouseGenderMobile("Male")} /><label className="mb-0 text-1 fs-14 fw-bold">Male</label></div></div>
-                          <div className="col-6"><div className="gender-card mobile d-flex align-items-center gap-2"><input type="radio" name="spouseGenderMobile" className="form-check-input-1 m-0" value="Female" checked={spouseGenderMobile==="Female"} onChange={() => setSpouseGenderMobile("Female")} /><label className="mb-0 text-1 fs-14 fw-bold">Female</label></div></div>
+                          <div className="col-6"><div className="gender-card mobile d-flex align-items-center gap-2"><input type="radio" name="spouseGenderMobile" className="form-check-input-1 m-0" value="Male" checked={spouseGenderMobile === "Male"} onChange={() => setSpouseGenderMobile("Male")} /><label className="mb-0 text-1 fs-14 fw-bold">Male</label></div></div>
+                          <div className="col-6"><div className="gender-card mobile d-flex align-items-center gap-2"><input type="radio" name="spouseGenderMobile" className="form-check-input-1 m-0" value="Female" checked={spouseGenderMobile === "Female"} onChange={() => setSpouseGenderMobile("Female")} /><label className="mb-0 text-1 fs-14 fw-bold">Female</label></div></div>
                         </div>
                         <div className="pt-0 pb-4 border-btm">
                           <p className="form-label fw-bold fs-16 text-primary text-center text-uppercase">What is your spouse date of birth?*</p>
                           <div className="input-box w-100">
-                            <div className="input-field"><input type="text" className="spouse-dob-mobile" placeholder="MM/DD/YYYY" value={spouseDobMobile} onChange={(e) => setSpouseDobMobile(e.target.value)} /></div>
+                            <div className="input-field"><input type="text" className="spouse-dob-mobile" placeholder="MM/DD/YYYY" value={spouseDobMobile} onChange={(e) => setSpouseDobMobile(formatDob(e.target.value))} /></div>
                           </div>
                         </div>
                       </>
@@ -573,8 +570,8 @@ export default function Home() {
                       <div className="children-section fs-16 text-center border-btm py-4">
                         <h6 className="fw-bold mb-3">How many children under the age of 26?*</h6>
                         <div className="d-flex justify-content-center gap-4">
-                          {[{v:"1",l:"1 Child"},{v:"2",l:"2 Children"},{v:"3",l:"3+ Children"}].map(({v,l}) => (
-                            <label key={v} className={`child-option children-${v}-mobile`}><input type="radio" name="childrenMobile" value={v} checked={childCountMobile===v} onChange={() => setChildCountMobile(v)} /><span>{l}</span></label>
+                          {[{ v: "1", l: "1 Child" }, { v: "2", l: "2 Children" }, { v: "3", l: "3+ Children" }].map(({ v, l }) => (
+                            <label key={v} className={`child-option children-${v}-mobile`}><input type="radio" name="childrenMobile" value={v} checked={childCountMobile === v} onChange={() => setChildCountMobile(v)} /><span>{l}</span></label>
                           ))}
                         </div>
                         <p className="note fs-16 m-0 mt-4">Price is the same for 3 or more children.</p>
@@ -597,13 +594,13 @@ export default function Home() {
         <div className="custom-container">
           <h2 className="fw-bold text-uppercase mb-3">What Real Members Are Saying About Solo</h2>
           <p className="mb-4">Join 1,000+ solopreneurs who trust Solo for major medical coverage—read verified reviews and ratings on Trustpilot.</p>
-          <div className="text-center"><Link href="https://www.trustpilot.com/review/hbgsolo.com" target="_blank" rel="noopener noreferrer"><img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/trustpilot-image.png" alt="Trustpilot" className="mb-5" /></Link></div>
+          <div className="text-center"><Link href="https://www.trustpilot.com/review/hbgsolo.com" target="_blank" rel="noopener noreferrer"><img src="/images/trustpilot-image.png" alt="Trustpilot" className="mb-5" /></Link></div>
         </div>
         <div className="slider slider-left">
           <div className="slide-track row flex-nowrap pt-3">
             {TESTIMONIALS_ROW1.map(([name, text], i) => (
               <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={i}>
-                <div className="card testimonial-card"><div className="card-body"><h6 className="fw-bold">{name}</h6><div className="rating-img"><img className="img-fluid" src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/Rating.png" alt="rating" /></div><p>{text}</p></div></div>
+                <div className="card testimonial-card"><div className="card-body"><h6 className="fw-bold">{name}</h6><div className="rating-img"><img className="img-fluid" src="/images/Rating.png" alt="rating" /></div><p>{text}</p></div></div>
               </div>
             ))}
           </div>
@@ -612,7 +609,7 @@ export default function Home() {
           <div className="slide-track row flex-nowrap pt-3">
             {TESTIMONIALS_ROW2.map(([name, text], i) => (
               <div className="col-12 col-md-6 col-lg-4 col-xl-3" key={i}>
-                <div className="card testimonial-card"><div className="card-body"><h6 className="fw-bold">{name}</h6><div className="rating-img"><img className="img-fluid" src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/Rating.png" alt="rating" /></div><p>{text}</p></div></div>
+                <div className="card testimonial-card"><div className="card-body"><h6 className="fw-bold">{name}</h6><div className="rating-img"><img className="img-fluid" src="/images/Rating.png" alt="rating" /></div><p>{text}</p></div></div>
               </div>
             ))}
           </div>
@@ -623,13 +620,13 @@ export default function Home() {
       <section className="network-section text-center" data-aos="fade-up" data-aos-duration="2000">
         <div className="custom-container">
           <h2 className="fw-bold text-uppercase mb-3">Easily Find In-Network Doctors &amp; Specialists</h2>
-          <img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/MULTIPLAN_LOGO_RGB_IMG.png" alt="MultiPlan" className="pt-3 pb-4" style={{ maxWidth:"300px" }} />
-          <p className="lead mb-4">Solo partners with MultiPlan&apos;s PHCS offering nationwide access to over <strong style={{ fontWeight:600 }}>1.4 million physicians, hospitals, and specialists</strong>, plus the flexibility of an open network for accepting providers.</p>
+          <img src="/images/MULTIPLAN_LOGO_RGB_IMG.png" alt="MultiPlan" className="pt-3 pb-4" style={{ maxWidth: "300px" }} />
+          <p className="lead mb-4">Solo partners with MultiPlan&apos;s PHCS offering nationwide access to over <strong style={{ fontWeight: 600 }}>1.4 million physicians, hospitals, and specialists</strong>, plus the flexibility of an open network for accepting providers.</p>
         </div>
         <div className="logos-slider background-gradient-1">
           <div className="logos-track">
-            {[...PARTNER_LOGOS,...PARTNER_LOGOS].map(([img,alt],i) => (
-              <img key={i} src={`https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/${img}`} alt={alt} className="partner-logo" />
+            {[...PARTNER_LOGOS, ...PARTNER_LOGOS].map(([img, alt], i) => (
+              <img key={i} src={`/images/${img}`} alt={alt} className="partner-logo" />
             ))}
           </div>
         </div>
@@ -678,7 +675,7 @@ export default function Home() {
               <div className="col-12 col-lg-7">
                 <div className="solo-points">
                   {JOIN_STEPS.map(([num, title, desc], i) => (
-                    <div className="point-one" key={i} data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay={i*400} data-aos-offset="0">
+                    <div className="point-one" key={i} data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay={i * 400} data-aos-offset="0">
                       <div className="number"><p>{num}</p></div>
                       <div className="point-text"><h5>{title}</h5><p>{desc}</p></div>
                     </div>
@@ -686,20 +683,20 @@ export default function Home() {
                 </div>
                 <div className="custom-slider-2 d-block d-lg-none" onTouchStart={handleJoinTouchStart} onTouchEnd={handleJoinTouchEnd}>
                   <div className="slides">
-                    {JOIN_STEPS.map(([num,title,desc],i) => (
-                      <div className={`slide${i===joinSlide?" active":""}`} key={i}>
+                    {JOIN_STEPS.map(([num, title, desc], i) => (
+                      <div className={`slide${i === joinSlide ? " active" : ""}`} key={i}>
                         <div className="slider-point-one"><div className="number"><p>{num}</p></div><div className="point-text"><h5>{title}</h5><p>{desc}</p></div></div>
                       </div>
                     ))}
                   </div>
                   <div className="custom-dots">
-                    {JOIN_STEPS.map((_,i) => <span key={i} className={`dot${i===joinSlide?" active":""}`} onClick={() => setJoinSlide(i)} />)}
+                    {JOIN_STEPS.map((_, i) => <span key={i} className={`dot${i === joinSlide ? " active" : ""}`} onClick={() => setJoinSlide(i)} />)}
                   </div>
                 </div>
               </div>
               <div className="col-12 col-lg-5 overflow-hidden">
-                <img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/Group_12.png" data-aos="fade-left" data-aos-duration="1200" className="join-solo-image d-none d-md-block" alt="solos-banner" />
-                <img src="https://stage.hbgsolo.com/media/.renditions/wysiwyg/homepage/Group_12.png" data-aos="fade-left" data-aos-duration="1200" className="join-solo-image d-block d-md-none" alt="solos-banner" />
+                <img src="/images/Group_12.png" data-aos="fade-left" data-aos-duration="1200" className="join-solo-image d-none d-md-block" alt="solos-banner" />
+                <img src="/images/Group_12.png" data-aos="fade-left" data-aos-duration="1200" className="join-solo-image d-block d-md-none" alt="solos-banner" />
               </div>
             </div>
           </section>
@@ -744,8 +741,8 @@ export default function Home() {
                 <>
                   <div className="row py-4">
                     <p className="form-label fw-bold text-primary text-center text-uppercase">What is your spouse gender*</p>
-                    <div className="col-6"><div className="gender-card d-flex align-items-center gap-2"><input type="radio" name="spouseGenderDesktop" className="form-check-input-1 m-0" value="Male" checked={spouseGenderDesktop==="Male"} onChange={() => setSpouseGenderDesktop("Male")} /><label className="mb-0 text-1 fs-14 fw-bold">Male</label></div></div>
-                    <div className="col-6"><div className="gender-card d-flex align-items-center gap-2"><input type="radio" name="spouseGenderDesktop" className="form-check-input-1 m-0" value="Female" checked={spouseGenderDesktop==="Female"} onChange={() => setSpouseGenderDesktop("Female")} /><label className="mb-0 text-1 fs-14 fw-bold">Female</label></div></div>
+                    <div className="col-6"><div className="gender-card d-flex align-items-center gap-2"><input type="radio" name="spouseGenderDesktop" className="form-check-input-1 m-0" value="Male" checked={spouseGenderDesktop === "Male"} onChange={() => setSpouseGenderDesktop("Male")} /><label className="mb-0 text-1 fs-14 fw-bold">Male</label></div></div>
+                    <div className="col-6"><div className="gender-card d-flex align-items-center gap-2"><input type="radio" name="spouseGenderDesktop" className="form-check-input-1 m-0" value="Female" checked={spouseGenderDesktop === "Female"} onChange={() => setSpouseGenderDesktop("Female")} /><label className="mb-0 text-1 fs-14 fw-bold">Female</label></div></div>
                   </div>
                   <div className="pt-0 pb-4 border-btm">
                     <p className="form-label fw-bold text-primary text-center text-uppercase">What is your spouse date of birth?*</p>
@@ -767,8 +764,8 @@ export default function Home() {
                 <div className="children-section text-center border-btm py-4">
                   <h6 className="fw-bold mb-3">How many children under the age of 26?*</h6>
                   <div className="d-flex justify-content-center gap-5">
-                    {[{v:"1",l:"1 Child"},{v:"2",l:"2 Children"},{v:"3",l:"3+ Children"}].map(({v,l}) => (
-                      <label key={v} className={`child-option children-${v}`}><input type="radio" name="childrenDesktop" value={v} checked={childCountDesktop===v} onChange={() => setChildCountDesktop(v)} /><span>{l}</span></label>
+                    {[{ v: "1", l: "1 Child" }, { v: "2", l: "2 Children" }, { v: "3", l: "3+ Children" }].map(({ v, l }) => (
+                      <label key={v} className={`child-option children-${v}`}><input type="radio" name="childrenDesktop" value={v} checked={childCountDesktop === v} onChange={() => setChildCountDesktop(v)} /><span>{l}</span></label>
                     ))}
                   </div>
                   <p className="note m-0 mt-4">Price is the same for 3 or more children.</p>
@@ -783,7 +780,7 @@ export default function Home() {
         </div>
       )}
 
-      <Footer />
+      
     </>
   );
 }

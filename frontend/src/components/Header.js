@@ -23,7 +23,7 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
           <div className="left-side">
             <Link className="text-decoration-none" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
               <div className="d-flex gap-3 align-items-center">
-                <div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/menu-bars.png" alt="" /></div>
+                <div><img src="/images/menu-bars.png" alt="" /></div>
                 <p className="m-0 fs-14 fw-bold text-primary">Menu</p>
               </div>
             </Link>
@@ -45,7 +45,7 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                   <div className="menu-home close_menu"><Link href="/">Home</Link></div>
                 </div>
                 <div className="d-block d-lg-none">
-                  <img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/mobile-menu-logo.png" alt="" />
+                  <img src="/images/mobile-menu-logo.png" alt="mobilemenulogo" />
                 </div>
               </div>
 
@@ -56,35 +56,35 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                       <div className="menu-grid">
                         <div className="grid-1 d-flex flex-column">
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/paln-img.png" alt="" /></div><p>Plans and Coverage</p></div>
+                            <div className="Menu-headings"><div><img src="/images/paln-img.png" alt="" /></div><p>Plans and Coverage</p></div>
                             <div className="menu-content">
-                              <div className="menu-item"><Link href="/plan-summary"><h6>Plan Summary</h6><p>Overview of deductibles, benefits, and plan highlights at a glance.</p></Link></div>
-                              <div className="menu-item"><Link href="/faq"><h6>Policy FAQ</h6><p>Clear answers to the most common plan questions.</p></Link></div>
+                              <div className="menu-item"><a href="/plan-summary"><h6>Plan Summary</h6><p>Overview of deductibles, benefits, and plan highlights at a glance.</p></a></div>
+                              <div className="menu-item"><a href="/faq"><h6>Policy FAQ</h6><p>Clear answers to the most common plan questions.</p></a></div>
                             </div>
                           </div>
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/network.png" alt="" /></div><p>Our Network</p></div>
+                            <div className="Menu-headings"><div><img src="/images/network.png" alt="" /></div><p>Our Network</p></div>
                             <div className="menu-content">
-                              <div className="menu-item"><Link href="/our-network"><h6>Find a Doctor</h6><p>Search 1.4M+ in-network providers across the Multiplan PHCS PPO network.</p></Link></div>
+                              <div className="menu-item"><a href="/our-network"><h6>Find a Doctor</h6><p>Search 1.4M+ in-network providers across the Multiplan PHCS PPO network.</p></a></div>
                             </div>
                           </div>
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/member.png" alt="" /></div><p>About us</p></div>
+                            <div className="Menu-headings"><div><img src="/images/member.png" alt="" /></div><p>About us</p></div>
                             <div className="menu-content">
-                              <div className="menu-item"><Link href="/about-us"><h6>Company</h6><p>Learn about Solo&apos;s mission to redefine healthcare for solopreneurs.</p></Link></div>
-                              <div className="menu-item"><Link href="/about-us#license"><h6>Licensing</h6><p>Review state licenses and compliance information.</p></Link></div>
+                              <div className="menu-item"><a href="/about-us"><h6>Company</h6><p>Learn about Solo&apos;s mission to redefine healthcare for solopreneurs.</p></a></div>
+                              <div className="menu-item"><a href="/about-us#license"><h6>Licensing</h6><p>Review state licenses and compliance information.</p></a></div>
                             </div>
                           </div>
                         </div>
                         <div className="grid-2 d-flex flex-column">
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/member.png" alt="" /></div><p>Member Services</p></div>
+                            <div className="Menu-headings"><div><img src="/images/member.png" alt="" /></div><p>Member Services</p></div>
                             <div className="menu-content">
                               <div className="menu-item"><Link href="/member-services"><h6>Manage your Portal</h6><p>Access your ID cards, claims, benefits, and personal plan details online.</p></Link></div>
                             </div>
                           </div>
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/resource.png" alt="" /></div><p>Resources</p></div>
+                            <div className="Menu-headings"><div><img src="/images/resource.png" alt="" /></div><p>Resources</p></div>
                             <div className="menu-content">
                               <div className="menu-item"><Link href="/how-it-works"><h6>How it Works</h6><p>Step-by-step guide to setting up and using your Solo plan.</p></Link></div>
                               <div className="menu-item"><Link href="/resource-articles"><h6>Resource Articles</h6><p>Understand the unique structure of Solo compared to market alternatives.</p></Link></div>
@@ -94,7 +94,7 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                             </div>
                           </div>
                           <div className="plans">
-                            <div className="Menu-headings"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/conatctus.png" alt="" /></div><p>Contact Us</p></div>
+                            <div className="Menu-headings"><div><img src="/images/conatctus.png" alt="" /></div><p>Contact Us</p></div>
                             <div className="menu-content">
                               <div className="menu-item"><Link href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"><h6>Schedule a consult</h6><p>Book a call with our team to review your options.</p></Link></div>
                               <div className="menu-item"><Link href="/contact#partner"><h6>Partner with us</h6><p>Explore opportunities to collaborate with Solo Health Collective.</p></Link></div>
@@ -137,15 +137,15 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                     <div className="col-12 col-lg-6 col-xl-4">
                       <div className="video">
                         <div className="video-heading">
-                          <div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/video.png" alt="" /></div>
+                          <div><img src="/images/video.png" alt="" /></div>
                           <div><h6>SOLO Academy</h6><p className="d-none d-md-block">Watch educational videos and listen to podcasts that explain Solo&apos;s approach and guide you through your plan.</p></div>
                         </div>
                         <div className="mt-2 menu-video-wrapper">
                           <video autoPlay muted loop playsInline className="menu-video">
-                            <source src="https://hbgsolo.com/static/frontend/Hbg/theme1/en_US/videos/video1.mp4" type="video/mp4" />
+                            <source src="/videos/video2.mp4" type="video/mp4" />
                           </video>
                           <div className="video-overlay"></div>
-                          <img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/Play.png" alt="Play" className="play-button" />
+                          <img src="/images/Play.png" alt="Play" className="play-button" />
                         </div>
                         <div className="pt-3">
                           <Link href="https://www.youtube.com/watch?v=by_olN-27v4" target="_blank" rel="noopener noreferrer">
@@ -159,7 +159,7 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                         </div>
                       </div>
                       <div className="news-box">
-                        <div className="news-heading"><div><img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/news.png" alt="" /></div><div><h6>News</h6></div></div>
+                        <div className="news-heading"><div><img src="/images/news.png" alt="" /></div><div><h6>News</h6></div></div>
                         <div className="owl-carousel owl-theme d-none d-md-block">
                           <div className="news-slide"><div className="news-card"><h3>Uprise</h3><p>Solo partners with Uprise to enhance financial planning for solopreneurs.</p></div><div className="news-card"><h3>IndeCollective</h3><p>Solo and IndeCollective collaborate to support independent business growth.</p></div></div>
                           <div className="news-slide"><div className="news-card"><h3>Carry</h3><p>Carry joins Solo to provide tailored tax and investment support.</p></div><div className="news-card"><h3>Simply Business</h3><p>Solo partners with Simply Business to offer specialized insurance solutions.</p></div></div>
@@ -172,7 +172,7 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                         </div>
                       </div>
                       <div className="d-flex justify-content-end">
-                        <img src="https://stage.hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/solo-menu-logo.png" className="pt-3 mobile-logo" alt="" />
+                        <img src="/images/solo-menu-logo.png" className="pt-3 mobile-logo" alt="" />
                       </div>
                       <div className="mobile-menu-button d-flex gap-2 justify-content-center align-items-center pt-3 d-block d-md-none">
                         <Link className="btn-one homebutton text-center fs-14" href="/#quote-section">
