@@ -27,6 +27,7 @@ export default function LayoutShell({ children }) {
   // ClientInit calls onNotificationReady() after hydration to prevent SSR flash
   const [notifVisible, setNotifVisible] = useState(false);
   const handleNotificationReady = useCallback(() => setNotifVisible(true), []);
+  const handleCloseNotif = useCallback(() => setNotifVisible(false), []);
 
   // ── FAQ banner click ──────────────────────────────────────────────────────
   // The .solo-banner link lives on the home page. It should scroll to #ques2
@@ -69,10 +70,13 @@ export default function LayoutShell({ children }) {
         sidebarOpen={sidebarOpen}
         handleToggleSidebar={handleToggleSidebar}
         notifVisible={notifVisible}
+        onCloseNotif={handleCloseNotif}
       />
 
       {/* Page content */}
-      <main>{children}</main>
+      <main style={{ paddingTop: notifVisible ? '90px' : '85px' }} className="transition-all">
+        {children}
+      </main>
 
       {/* Footer — rendered on every page */}
       <Footer />

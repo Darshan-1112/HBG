@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function ContactPage() {
-  // State for Feedback Form
+  // --- ACCORDION STATE ---
+  // feedback is open by default as per source (collapseOne has 'show')
+  const [openAccordion, setOpenAccordion] = useState("feedback");
+
+  // --- FORM STATES ---
   const [feedbackData, setFeedbackData] = useState({
     firstname: "",
     lastname: "",
@@ -13,7 +17,6 @@ export default function ContactPage() {
     comment: "",
   });
 
-  // State for Partner Form
   const [partnerData, setPartnerData] = useState({
     company: "",
     name: "",
@@ -22,17 +25,16 @@ export default function ContactPage() {
     comment: "",
   });
 
-  // Handle URL Hash (#partner) to open specific accordion
+  // --- HASH HANDLING (React Way) ---
   useEffect(() => {
     if (window.location.hash === "#partner") {
-      const partnerBtn = document.querySelector('[data-bs-target="#collapse2"]');
-      if (partnerBtn && partnerBtn.classList.contains('collapsed')) {
-        partnerBtn.click();
-      }
+      setOpenAccordion("partner");
+    } else if (window.location.hash === "#feedback") {
+      setOpenAccordion("feedback");
     }
   }, []);
 
-  // Phone number formatter (matches your source logic)
+  // --- HELPERS ---
   const formatPhoneNumber = (value) => {
     const numbers = value.replace(/\D/g, "");
     if (numbers.length > 6) {
@@ -54,7 +56,6 @@ export default function ContactPage() {
     }
   };
 
-  // Real JSON API Call using Fetch
   const handleSubmit = async (e, formType) => {
     e.preventDefault();
     const data = formType === "feedback" ? feedbackData : partnerData;
@@ -67,17 +68,13 @@ export default function ContactPage() {
           body: data,
           userId: 1,
         }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
+        headers: { "Content-type": "application/json; charset=UTF-8" },
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Success:", result);
-        alert(`${formType.toUpperCase()} submitted successfully! ID: ${result.id}`);
-        
-        // Reset form after success
+        alert(`${formType.toUpperCase()} submitted successfully!`);
+        // Reset Logic
         if (formType === "feedback") {
           setFeedbackData({ firstname: "", lastname: "", email: "", telephone: "", comment: "" });
         } else {
@@ -85,7 +82,6 @@ export default function ContactPage() {
         }
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
       alert("Submission failed. Check console.");
     }
   };
@@ -101,7 +97,7 @@ export default function ContactPage() {
             <div className="custom-container">
               <div className="breadcrumbs mb-4 d-flex d-lg-none">
                 <div>
-                  <img src="https://hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/breadcrumb-arrow.png" alt="arrow" />
+                  <img src="/images/breadcrumb-arrow.png" alt="arrow" />
                 </div>
                 <div>
                   <Link href="/">Home</Link> <span>/</span> <a>Contact Us</a>
@@ -119,12 +115,12 @@ export default function ContactPage() {
           {/* --- BANNER/SCHEDULE SECTION --- */}
           <section className="contact-us-div">
             <div className="d-block d-lg-none">
-              <img src="https://hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/contact-us-mobile.png" className="w-100" alt="banner-image" />
+              <img src="/images/contact-us-mobile.png" className="w-100" alt="banner-image" />
             </div>
             <div className="custom-container">
               <div className="breadcrumbs d-none d-lg-flex">
                 <div>
-                  <img src="https://hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/breadcrumb-arrow.png" alt="arrow" />
+                  <img src="/images/breadcrumb-arrow.png" alt="arrow" />
                 </div>
                 <div>
                   <Link href="/">Home</Link> <span>/</span> <a>Contact Us</a>
@@ -132,7 +128,7 @@ export default function ContactPage() {
               </div>
               <div className="row g-3 g-lg-5 align-items-center d-none d-lg-flex">
                 <div className="col-12 col-lg-6 text-center text-lg-start">
-                  <img src="https://hbgsolo.com/static/frontend/Hbg/theme1/en_US/images/contact-us.png" className="img-fluid" alt="banner-image" />
+                  <img src="/images/contact-us.png" className="img-fluid" alt="banner-image" />
                 </div>
                 <div className="col-12 col-lg-6">
                   <div className="schedule">
@@ -154,10 +150,14 @@ export default function ContactPage() {
                 <div className="tab-content pt-3 pb-1">
                   <div className="accordion d-flex flex-column gap-3 gap-md-0" id="medicalAccordion">
                     
-                    {/* FEEDBACK FORM */}
-                    <div className="accordion-item step-card active" id="feedback">
+                    {/* FEEDBACK FORM ACCORDION */}
+                    <div className={`accordion-item step-card ${openAccordion === 'feedback' ? 'active' : ''}`} id="feedback">
                       <h2 className="accordion-header">
-                        <button className="accordion-button d-flex justify-content-between w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                        <button 
+                          className={`accordion-button d-flex justify-content-between w-100 ${openAccordion !== 'feedback' ? 'collapsed' : ''}`} 
+                          type="button" 
+                          onClick={() => setOpenAccordion(openAccordion === 'feedback' ? '' : 'feedback')}
+                        >
                           <div className="d-flex align-items-center gap-2 gap-md-4 w-100">
                             <div>
                               <h6 className="fw-semibold mb-0 mb-md-1 text-primary accordian-heading"> Leave Us Feedback</h6>
@@ -166,12 +166,15 @@ export default function ContactPage() {
                           </div>
                         </button>
                       </h2>
-                      <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#medicalAccordion">
+                      <div className={`accordion-collapse collapse ${openAccordion === 'feedback' ? 'show' : ''}`}>
                         <div className="accordion-body">
                           <form className="form contact" onSubmit={(e) => handleSubmit(e, "feedback")}>
                             <div className="row g-3 mb-4">
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="firstname" value={feedbackData.firstname} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="text" required />
                                     <label className="custom-input-label">First Name</label>
@@ -180,6 +183,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="lastname" value={feedbackData.lastname} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="text" required />
                                     <label className="custom-input-label">Last Name</label>
@@ -188,6 +194,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="email" value={feedbackData.email} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="email" required />
                                     <label className="custom-input-label">Email</label>
@@ -196,6 +205,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="telephone" value={feedbackData.telephone} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="tel" />
                                     <label className="custom-input-label">Phone</label>
@@ -218,10 +230,14 @@ export default function ContactPage() {
                       </div>
                     </div>
 
-                    {/* PARTNER FORM */}
-                    <div className="accordion-item step-card" id="partner">
+                    {/* PARTNER FORM ACCORDION */}
+                    <div className={`accordion-item step-card ${openAccordion === 'partner' ? 'active' : ''}`} id="partner">
                       <h2 className="accordion-header">
-                        <button className="accordion-button collapsed d-flex justify-content-between w-100" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                        <button 
+                          className={`accordion-button d-flex justify-content-between w-100 ${openAccordion !== 'partner' ? 'collapsed' : ''}`} 
+                          type="button" 
+                          onClick={() => setOpenAccordion(openAccordion === 'partner' ? '' : 'partner')}
+                        >
                           <div className="d-flex align-items-center gap-2 gap-md-4 w-100">
                             <div>
                               <h6 className="fw-semibold mb-0 mb-md-1 text-primary accordian-heading"> Partner With Us</h6>
@@ -230,12 +246,15 @@ export default function ContactPage() {
                           </div>
                         </button>
                       </h2>
-                      <div id="collapse2" className="accordion-collapse collapse" data-bs-parent="#medicalAccordion">
+                      <div className={`accordion-collapse collapse ${openAccordion === 'partner' ? 'show' : ''}`}>
                         <div className="accordion-body">
                           <form className="form partnerprogram" onSubmit={(e) => handleSubmit(e, "partner")}>
                             <div className="row g-4 mb-4">
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="company" value={partnerData.company} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="text" />
                                     <label className="custom-input-label">Company Name</label>
@@ -244,6 +263,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="name" value={partnerData.name} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="text" required />
                                     <label className="custom-input-label">Name</label>
@@ -252,6 +274,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="email" value={partnerData.email} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="email" required />
                                     <label className="custom-input-label">Email</label>
@@ -260,6 +285,9 @@ export default function ContactPage() {
                               </div>
                               <div className="col-12 col-lg-6">
                                 <div className="input-box w-100">
+                                  <div className="icon">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
+                                  </div>
                                   <div className="input-field">
                                     <input name="telephone" value={partnerData.telephone} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="tel" />
                                     <label className="custom-input-label">Phone</label>
@@ -290,13 +318,26 @@ export default function ContactPage() {
         </div>
       </div>
       
-      {/* Inline styles for hover effect */}
+      {/* PERSISTENT SOURCE STYLES */}
       <style>{`
-      body {
+        body {
           background: radial-gradient(circle at top left, rgba(255, 235, 180, 0.3) 0%, rgba(255, 235, 180, 0.3) 0%, rgb(255, 255, 255) 30%);
         }
         li:hover { cursor: pointer; }
         .custom-input-label { pointer-events: none; }
+        
+        /* Transition for accordion height */
+        .accordion-collapse {
+          transition: height 0.35s ease;
+          overflow: hidden;
+        }
+        .accordion-collapse:not(.show) {
+          height: 0;
+          display: none;
+        }
+        .accordion-collapse.show {
+          display: block;
+        }
       `}</style>
     </main>
   );

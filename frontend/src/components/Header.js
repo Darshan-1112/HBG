@@ -13,7 +13,7 @@ const SIDEBAR_SECTIONS = [
   { title:"Contact Us", icon:"conatctus.png", links:[{ href:CALENDLY_LINK, label:"Schedule a consult", external:true },{ href:"/contact#partner", label:"Partner with us", cls:"custom-border" },{ href:"/contact#feedback", label:"Leave us feedback" }] },
 ];
 
-export default function Header({ sidebarOpen, handleToggleSidebar }) {
+export default function Header({ sidebarOpen, handleToggleSidebar,notifVisible, onCloseNotif }) {
   return (
     <section className="header">
       <div className="custom-container home-container">
@@ -99,8 +99,8 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                             <div className="Menu-headings"><div><img src="/images/conatctus.png" alt="" /></div><p>Contact Us</p></div>
                             <div className="menu-content">
                               <div className="menu-item"><Link href={CALENDLY_LINK} target="_blank" rel="noopener noreferrer"><h6>Schedule a consult</h6><p>Book a call with our team to review your options.</p></Link></div>
-                              <div className="menu-item"><Link href="/contact#partner"><h6>Partner with us</h6><p>Explore opportunities to collaborate with Solo Health Collective.</p></Link></div>
-                              <div className="menu-item"><Link href="/contact#feedback"><h6>Leave us feedback</h6><p>Share your thoughts to help us improve member experience.</p></Link></div>
+                              <div className="menu-item"><a href="/contact#partner"><h6>Partner with us</h6><p>Explore opportunities to collaborate with Solo Health Collective.</p></a></div>
+                              <div className="menu-item"><a href="/contact#feedback"><h6>Leave us feedback</h6><p>Share your thoughts to help us improve member experience.</p></a></div>
                             </div>
                           </div>
                         </div>
