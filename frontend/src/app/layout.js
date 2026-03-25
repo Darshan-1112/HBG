@@ -4,7 +4,7 @@ import "./globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // import "../styles/a1.css";
-import "../styles/a2.css";
+// import "../styles/a2.css";
 import "../styles/a3.css";
 // import "../styles/a4.css";
 // import "../styles/a5.css";

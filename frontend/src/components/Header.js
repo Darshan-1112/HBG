@@ -42,7 +42,8 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                   <div className="menu-btn btn-closes text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
                     <Link href="/"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path fillRule="evenodd" clipRule="evenodd" d="M1.99532 6.07083C1.57389 6.45012 1.33325 6.99045 1.33325 7.55742V12.6667C1.33325 13.7713 2.22868 14.6667 3.33325 14.6667H12.6666C13.7712 14.6667 14.6666 13.7713 14.6666 12.6667V7.55742C14.6666 6.99045 14.4259 6.45012 14.0045 6.07083L9.33785 1.87083C8.57724 1.18628 7.4226 1.18629 6.66199 1.87083L1.99532 6.07083ZM7.33325 8.6667C6.59687 8.6667 5.99992 9.26365 5.99992 10V12.6667C5.99992 13.0349 6.2984 13.3334 6.66659 13.3334H9.33325C9.70144 13.3334 9.99992 13.0349 9.99992 12.6667V10C9.99992 9.26365 9.40297 8.6667 8.66659 8.6667H7.33325Z" fill="#FFBF00" /></svg></Link>
                   </div>
-                  <div className="menu-home close_menu"><Link href="/">Home</Link></div>
+                  <div className="menu-home close_menu"><a
+                   href="/">Home</a></div>
                 </div>
                 <div className="d-block d-lg-none">
                   <img src="/images/mobile-menu-logo.png" alt="mobilemenulogo" />
@@ -80,17 +81,18 @@ export default function Header({ sidebarOpen, handleToggleSidebar }) {
                           <div className="plans">
                             <div className="Menu-headings"><div><img src="/images/member.png" alt="" /></div><p>Member Services</p></div>
                             <div className="menu-content">
-                              <div className="menu-item"><Link href="/member-services"><h6>Manage your Portal</h6><p>Access your ID cards, claims, benefits, and personal plan details online.</p></Link></div>
+                              <div className="menu-item"><a href="/member-services"><h6>Manage your Portal</h6><p>Access your ID cards, claims, benefits, and personal plan details online.</p></a></div>
+                              <div className="menu-item"><a href="/concierge-support"><h6>Get Support (Active Members)</h6><p>Get help with your plan, claims, or benefits from our concierge team.</p></a></div>
                             </div>
                           </div>
                           <div className="plans">
                             <div className="Menu-headings"><div><img src="/images/resource.png" alt="" /></div><p>Resources</p></div>
                             <div className="menu-content">
-                              <div className="menu-item"><Link href="/how-it-works"><h6>How it Works</h6><p>Step-by-step guide to setting up and using your Solo plan.</p></Link></div>
-                              <div className="menu-item"><Link href="/resource-articles"><h6>Resource Articles</h6><p>Understand the unique structure of Solo compared to market alternatives.</p></Link></div>
-                              <div className="menu-item"><Link href="/preventive-care"><h6>Preventive Care Guide</h6><p>Stay on top of covered preventive services and annual screenings.</p></Link></div>
-                              <div className="menu-item"><Link href="/mental-health"><h6>Mental Health &amp; Wellness</h6><p>Resources and benefits that support your overall well-being</p></Link></div>
-                              <div className="menu-item"><Link href="/emergency-care-benefits"><h6>Emergency Care Benefits</h6><p>Understand how emergency services are covered, including urgent care, ER visits, and international emergencies.</p></Link></div>
+                              <div className="menu-item"><a href="/how-it-works"><h6>How it Works</h6><p>Step-by-step guide to setting up and using your Solo plan.</p></a></div>
+                              <div className="menu-item"><a href="/resource-articles"><h6>Resource Articles</h6><p>Understand the unique structure of Solo compared to market alternatives.</p></a></div>
+                              <div className="menu-item"><a href="/preventive-care"><h6>Preventive Care Guide</h6><p>Stay on top of covered preventive services and annual screenings.</p></a></div>
+                              <div className="menu-item"><a href="/mental-health"><h6>Mental Health &amp; Wellness</h6><p>Resources and benefits that support your overall well-being</p></a></div>
+                              <div className="menu-item"><a href="/emergency-care-benefits"><h6>Emergency Care Benefits</h6><p>Understand how emergency services are covered, including urgent care, ER visits, and international emergencies.</p></a></div>
                             </div>
                           </div>
                           <div className="plans">

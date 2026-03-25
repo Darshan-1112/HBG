@@ -1782,7 +1782,9 @@
 }
 @media (max-width: 768px) {
   .hero-section .hero-bg {
-    height: 600px;
+   height: auto !important;
+    min-height: 600px;
+    padding-bottom: 50px;
   }
 }
 @media (max-width: 576px) {
@@ -2065,8 +2067,8 @@
   }
 }
 .stats-carousel .outer {
-  position: absolute;
-  bottom: -216px;
+  position: relative;
+  bottom: auto;
   width: 100%;
   overflow: hidden;
   padding-bottom: 40px;
@@ -2074,7 +2076,7 @@
 .stats-carousel .stats-owl .stats-card {
   max-width: 260px !important;
   margin: 0 auto;
-  padding: 35px 30px;
+  padding: 30px !important;
   background: #fff;
   border-radius: 30px;
   transition: 0.3s;
@@ -2279,7 +2281,8 @@
   }
 }
 @media (max-width: 992px) {
-  .medical-coverage .coverage .row {
+  /* Only hide the desktop tiles grid — NOT the quote form rows */
+  .medical-coverage .coverage .row.g-5 {
     display: none !important;
   }
 }
@@ -2301,6 +2304,12 @@
 .medical-coverage .coverage-tiles .tile-image {
   text-align: center;
   padding-bottom: 15px;
+}
+.medical-coverage .coverage-tiles .tile-image img {
+  width: 69px;
+  height: 65px;
+  object-fit: contain;
+  display: inline-block;
 }
 .medical-coverage .coverage-tiles .coverage-tiles, .medical-coverage .coverage-tiles .tiles-title,
 .medical-coverage .coverage-tiles .coverage-tiles, .medical-coverage .coverage-tiles .tiles-subtitle {
@@ -20346,6 +20355,7 @@ textarea.form-control-lg {
 .member-hero-section .member-btns {
   display: flex;
   gap: 30px;
+  padding:10px;
   margin-bottom: 32px;
 }
 @media (max-width: 767px) {
@@ -20380,6 +20390,7 @@ textarea.form-control-lg {
   background-color: #262965;
   border: none;
   border-radius: 5px;
+  padding:20px;
 }
 @media (max-width: 767px) {
   .member-hero-section .member-btns .btn-two {
@@ -20416,25 +20427,25 @@ textarea.form-control-lg {
   font-weight: 400;
   margin: 0;
 }
-.benifit-section .benifits-card .logo {
+/* .benifit-section .benifits-card .logo {
   margin-bottom: 10px;
   text-align: center;
-}
-.benifit-section .benifits-card .content h5, .benifit-section .benifits-card .content .h5 {
+} */
+/* .benifit-section .benifits-card .content h5, .benifit-section .benifits-card .content .h5 {
   font-size: clamp(15px, 1.3vw, 18px) !important;
   color: #262965;
   text-align: center;
   font-weight: 700;
   margin: 0;
   margin-bottom: 10px;
-}
-.benifit-section .benifits-card .content p {
+} */
+/* .benifit-section .benifits-card .content p {
   color: #262965;
   font-weight: 400;
   font-size: clamp(14px, 1.2vw, 16px) !important;
   text-align: center;
   margin: 0;
-}
+} */
 .benifit-section .custom-slider {
   margin-top: 32px !important;
   text-align: center;
@@ -22968,9 +22979,6 @@ section.pricing-section .plan3 .price-card h3 {
 header.page-header {
   margin-bottom: 0px !important;
 }
-.stats-carousel .stats-owl .stats-card {
-  padding: 30px !important;
-}
 .steeper-section-left-wrapper .sidebar-steps .steps .step {
    margin-bottom: 0;
 }
@@ -23300,7 +23308,7 @@ html, body {
     font-weight: 400;
     font-size: clamp(14px, 1.2vw, 16px) !important;
 }
-.member-hero-section .member-btns .btn-two {
+/* .member-hero-section .member-btns .btn-two {
     width: 264px;
     height: 60px;
     font-size: clamp(14px, 1.2vw, 16px) !important;
@@ -23309,7 +23317,7 @@ html, body {
     background-color: #262965;
     border: none;
     border-radius: 5px;
-}
+} */
 .member-hero-section .member-btns .btn-one {
     width: 264px;
     height: 60px;
@@ -23339,23 +23347,46 @@ html, body {
     margin: 0;
 }
 .benifit-section .benifits-card .logo {
+    flex-shrink: 0;
     margin-bottom: 10px;
     text-align: center;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.benifit-section .benifits-card {
+  display: flex;
+ 
+  align-items: flex-start !important; 
+  gap: 15px;
+  text-align: left;
 }
 .benifit-section .benifits-card .content h5, .benifit-section .benifits-card .content .h5 {
     font-size: clamp(15px, 1.3vw, 18px) !important;
     color: #262965;
-    text-align: center;
-    font-weight: 700;
+    text-align: left;
+    font-weight: 600;
     margin: 0;
-    margin-bottom: 10px;
+    line-height: 1.2;
+    display: flex;
+    gap:15px;
+    align-items:flex-start !important;
+    margin-bottom: 5px;
+}
+.benifit-section .benifits-card {
+  display: flex;
+  align-items: flex-start; /* Keeps icon at the top if text is long */
+  gap: 15px;
+  text-align: left; /* Align text to the left */
 }
 .benifit-section .benifits-card .content p {
     color: #262965;
     font-weight: 400;
     font-size: clamp(14px, 1.2vw, 16px) !important;
-    text-align: center;
+    text-align: left;
     margin: 0;
+    padding-top: 2px;
+    line-height: 1.4;
 }
 .insurance-section {
     padding: 80px 0px;
@@ -24370,4 +24401,1397 @@ span.disclaimer-text {
   border: none !important;
   font-size: 14px !important;
   font-family: inherit !important;
+}
+
+/* ============================================================
+   RESPONSIVE FIXES — Mobile & Tablet (added)
+   ============================================================ */
+
+/* ── Quote section mobile fixes ─────────────────────────────── */
+@media (max-width: 767px) {
+  .quote-section {
+    padding: 30px 0px;
+  }
+  .quote-section .quote-title {
+    font-size: clamp(20px, 6vw, 30px) !important;
+    text-align: center;
+  }
+  .quote-section .quote-subtitle {
+    font-size: 14px !important;
+    text-align: center;
+  }
+  /* Show all quote-section inputs properly */
+  .quote-section .input-card,
+  .quote-section .input-card-1 {
+    height: 52px !important;
+    width: 100% !important;
+    border-radius: 8px;
+  }
+  .quote-section .input-card .form-control,
+  .quote-section .input-card-1 .form-control {
+    font-size: 14px !important;
+  }
+  .quote-section .gender-selection .gender-card {
+    height: 52px !important;
+    font-size: 14px !important;
+  }
+  /* Calculate Cost button — make full width and visible */
+  .quote-section .a-q-btn {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 20px 0px !important;
+    align-items: stretch !important;
+  }
+  .quote-section .a-q-btn .agent-btn,
+  .quote-section .a-q-btn .quote-btn {
+    width: 100% !important;
+    height: 52px !important;
+    font-size: 14px !important;
+  }
+  /* Make active calculate btn always visible */
+  .quote-section .a-q-btn .agent-btn {
+    background-color: #FFBF00 !important;
+    color: #262965 !important;
+  }
+  .quote-section .form-label {
+    font-size: 13px !important;
+  }
+  .quote-section .form-switch .form-check-input {
+    height: 22px !important;
+    width: 44px !important;
+  }
+}
+
+/* ── About content — fix padding on mobile (was 230px top causing blank space) */
+@media (max-width: 767px) {
+  .about-content {
+    padding-top: 60px !important;
+    padding-bottom: 30px !important;
+  }
+}
+
+/* ── Hero section mobile text fixes ─────────────────────────── */
+@media (max-width: 767px) {
+  .hero-section .hero-bg {
+    min-height: 500px !important;
+    height: auto !important;
+    padding-bottom: 60px;
+  }
+  .hero-section .hero-p {
+    font-size: 38px !important;
+  }
+  .hero-section .hero-p p {
+    line-height: normal !important;
+    font-size: 38px !important;
+  }
+  /* Banner buttons on mobile */
+  .hero-section .banner_buttons {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    margin-top: 16px;
+    z-index: 4;
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+/* ── Stats carousel mobile ──────────────────────────────────── */
+@media (max-width: 767px) {
+  .stats-carousel .outer {
+    position: relative !important;
+    bottom: auto !important;
+    padding-bottom: 20px;
+  }
+}
+
+/* ── AOS animations — ensure they work on mobile ─────────────── */
+@media (max-width: 767px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  /* Re-enable for elements that should animate */
+  .about-content .animated-text p.line,
+  .about-content .animated-text-1 p.line {
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.8s ease-out, opacity 0.8s ease-out;
+  }
+  .about-content.reveal .animated-text p.line,
+  .about-content.reveal .animated-text-1 p.line {
+    clip-path: inset(0% 0 0 0);
+    opacity: 1;
+  }
+}
+
+/* ── AddMember Modal — full responsive fix ───────────────────── */
+/* The modal backdrop is position:fixed in React inline styles, 
+   but we need to ensure it works on all screen sizes */
+.medical-coverage > div[style*="position: fixed"] {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px;
+}
+
+@media (max-width: 767px) {
+  /* Modal panel */
+  .custom-modal {
+    max-width: 100% !important;
+    width: 100% !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    border-radius: 16px !important;
+    margin: 0 !important;
+  }
+  .custom-modal-body {
+    padding: 16px !important;
+  }
+  /* Spouse toggle */
+  .spouse-toggle-popup {
+    gap: 20px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+  /* Gender cards in modal */
+  .custom-modal .gender-card {
+    padding: 14px 12px !important;
+    font-size: 14px !important;
+  }
+  /* DOB input */
+  .custom-modal .input-box {
+    width: 100% !important;
+  }
+  /* Children option */
+  .custom-modal .child-option span {
+    font-size: 14px !important;
+  }
+  /* Modal buttons */
+  .custom-modal .help-btn,
+  .custom-modal .search-btn {
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+  .custom-modal .popup-button {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .custom-modal .popup-button .help-btn,
+  .custom-modal .popup-button .search-btn {
+    width: 100% !important;
+  }
+}
+
+/* ── Mobile-quote wrapper (mobile quote popup) ───────────────── */
+@media (max-width: 767px) {
+  .mobile-quote .custom-modal {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 16px !important;
+  }
+  .mobile-quote .custom-modal .gender-card {
+    padding: 14px 10px !important;
+  }
+  /* fs-32 title in modal */
+  .mobile-quote .custom-modal .form-title {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ── Pricing section mobile ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .pricing-section .recalculate-btn,
+  .pricing-section .talk-to-agent-btn,
+  .pricing-section .continue-btn {
+    padding: 12px 20px !important;
+    width: 100% !important;
+    font-size: 14px !important;
+  }
+  .pricing-section .email-input-group {
+    width: 100% !important;
+  }
+  .input-design {
+    width: 100% !important;
+  }
+}
+
+/* ── Bottom dropdown mobile ──────────────────────────────────── */
+@media (max-width: 767px) {
+  .bottom-dropdown {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+  }
+}
+
+/* ── Hero section watch video button ─────────────────────────── */
+@media (max-width: 767px) {
+  .hero-section .watch-video-1 {
+    bottom: 5% !important;
+    width: 90%;
+    text-align: center;
+  }
+}
+
+/* ── Testimonials slider on mobile ───────────────────────────── */
+@media (max-width: 767px) {
+  .testimonials-section .slider {
+    overflow: hidden;
+  }
+  .testimonials-section .slide-track {
+    animation-duration: 30s !important;
+  }
+}
+
+/* ── Network logos on mobile ─────────────────────────────────── */
+@media (max-width: 767px) {
+  .network-section .logos-track {
+    animation-duration: 20s !important;
+  }
+  .network-section .partner-logo {
+    margin: 0 20px !important;
+    max-height: 35px !important;
+  }
+}
+
+/* ── FAQ section mobile ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  .faq-section .faq-list .accordion-item .accordion-button {
+    font-size: 15px !important;
+    padding: 16px 0px !important;
+  }
+  .faq-section .faq-btn {
+    padding: 16px 40px !important;
+    width: 100%;
+  }
+}
+
+/* ── Switch plan section mobile ──────────────────────────────── */
+@media (max-width: 767px) {
+  .switch-plan-section .switch-heading {
+    font-size: clamp(22px, 7vw, 38px) !important;
+    margin-top: 16px;
+  }
+  .switch-plan-section .faded-text {
+    font-size: clamp(20px, 6vw, 36px) !important;
+  }
+}
+
+/* ── Header offcanvas on mobile ──────────────────────────────── */
+@media (max-width: 768px) {
+  .header .offcanvas-body {
+    padding-bottom: 100px !important;
+  }
+  .mobile-menu-button {
+    z-index: 1200 !important;
+  }
+}
+
+/* ── Full-video section mobile ───────────────────────────────── */
+@media (max-width: 767px) {
+  .full-video-section .video-wrapper {
+    max-height: 220px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* ── Coverage tiles animation — ensure visible on mobile ─────── */
+@media (max-width: 991px) {
+  .medical-coverage .coverage-tiles .tiles-title,
+  .medical-coverage .coverage-tiles .tiles-subtitle {
+    clip-path: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ── Join Solo section mobile dots ───────────────────────────── */
+@media (max-width: 767px) {
+  .join-solo .custom-slider-2 .custom-dots {
+    display: flex !important;
+  }
+}
+
+/* ── Ensure text visibility (clip-path fix for mobile Safari) ── */
+@media (max-width: 767px) {
+  .line.show {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    clip-path: none !important;
+  }
+  /* Hero text lines should be visible even before animation */
+  .hero-section .hero-p p.line-mask {
+    clip-path: inset(0% 0 0 0) !important;
+    animation: none !important;
+  }
+}
+
+
+/* ── AddMemberModal backdrop overlay (neutral class, not medical-coverage) ── */
+.modal-backdrop-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 16px;
+}
+
+.modal-backdrop-overlay .custom-modal {
+  max-width: 600px;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Custom modal styles shared between AddMemberModal and desktop popup */
+.modal-backdrop-overlay .custom-modal .form-title {
+  font-size: 1.4rem;
+  color: #1a1a3d;
+}
+.modal-backdrop-overlay .custom-modal .form-check-input:checked {
+  width: 48px;
+  height: 24px;
+  background-color: #2a85ff !important;
+  border: unset !important;
+}
+.modal-backdrop-overlay .custom-modal .form-switch .form-check-input {
+  height: 24px;
+  width: 48px;
+}
+.modal-backdrop-overlay .custom-modal .input-box {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 10px 16px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.modal-backdrop-overlay .custom-modal .input-field {
+  position: relative;
+  width: 100%;
+}
+.modal-backdrop-overlay .custom-modal .input-field input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 6px 0;
+  font-size: 16px;
+  color: #262965;
+  font-weight: 700;
+  background: transparent;
+}
+.modal-backdrop-overlay .custom-modal .gender-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.modal-backdrop-overlay .custom-modal .gender-card input[type=radio] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #262965;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.modal-backdrop-overlay .custom-modal .gender-card input[type=radio]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+.modal-backdrop-overlay .custom-modal .gender-card:has(input[type=radio]:checked) {
+  background-color: #2A85FF;
+  color: #fff;
+}
+.modal-backdrop-overlay .custom-modal .gender-card:has(input[type=radio]:checked) label {
+  color: #fff !important;
+}
+.modal-backdrop-overlay .custom-modal .gender-card:has(input[type=radio]:checked) input[type=radio] {
+  border-color: #fff;
+}
+.modal-backdrop-overlay .custom-modal .child-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: #262965;
+}
+.modal-backdrop-overlay .custom-modal .child-option input[type=radio] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #262965;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.modal-backdrop-overlay .custom-modal .child-option input[type=radio]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #1c1c4d;
+  border-radius: 50%;
+}
+.modal-backdrop-overlay .custom-modal .help-btn {
+  padding: 14px 28px;
+  background-color: #FFBF00;
+  color: #262965;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+}
+.modal-backdrop-overlay .custom-modal .search-btn {
+  padding: 14px 28px;
+  background-color: #262965;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+}
+
+@media (max-width: 767px) {
+  .modal-backdrop-overlay .custom-modal {
+    border-radius: 16px;
+    max-height: 92vh;
+  }
+  .modal-backdrop-overlay .custom-modal .popup-button {
+    flex-direction: column !important;
+  }
+  .modal-backdrop-overlay .custom-modal .help-btn,
+  .modal-backdrop-overlay .custom-modal .search-btn {
+    width: 100% !important;
+    text-align: center;
+  }
+  .modal-backdrop-overlay .custom-modal .gender-card {
+    padding: 14px 12px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   COMPREHENSIVE MOBILE FIXES — All responsive issues resolved
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── 1. Show med-heading & med-title on mobile ────────────────── */
+@media (max-width: 767px) {
+  /* d-block-1 was display:none on mobile — override for med-heading */
+  body.cms-home .d-block-1 {
+    display: block !important;
+  }
+  body.cms-home .m-block {
+    display: none !important;
+  }
+
+  /* med-title always visible */
+  .medical-coverage .med-title {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-size: 15px !important;
+    text-align: center;
+    padding: 0 16px;
+    margin-bottom: 20px;
+  }
+
+  /* medical-coverage section and coverage wrapper always visible */
+  .medical-coverage,
+  .medical-coverage .coverage {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
+
+/* ── 2. Quote form rows always visible on mobile ──────────────── */
+/* Re-show ALL .row elements inside .quote-section on all screens  */
+@media (max-width: 992px) {
+  .medical-coverage .coverage .quote-section .row,
+  .medical-coverage .coverage .quote_rates_form .row,
+  .medical-coverage .coverage .holdrate-fields.row,
+  .quote-section .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+/* ── 3. Quote section always visible (no AOS hiding it) ──────── */
+#quote-section,
+.quote-section {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* ── 4. Stats carousel — fix absolute positioning on mobile ───── */
+@media (max-width: 767px) {
+  .stats-carousel {
+    display: block !important;
+    position: relative !important;
+    margin-top: 0 !important;
+  }
+  .stats-carousel .outer {
+    position: relative !important;
+    bottom: auto !important;
+    top: auto !important;
+    padding: 20px 0 30px !important;
+    overflow: hidden;
+  }
+  .stats-carousel .owl-dots {
+    display: block !important;
+    margin-top: 10px !important;
+  }
+  .stats-carousel .owl-dot span {
+    background: #262965 !important;
+  }
+}
+
+/* ── 5. Mobile custom slider — ensure visible & dots work ─────── */
+@media (max-width: 991px) {
+  .medical-coverage .custom-slider {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  .medical-coverage .custom-slider .slides {
+    position: relative;
+    overflow: hidden;
+  }
+  .medical-coverage .custom-slider .slides .slide {
+    display: none;
+  }
+  .medical-coverage .custom-slider .slides .slide.active {
+    display: block !important;
+  }
+  .medical-coverage .custom-slider .custom-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .medical-coverage .custom-slider .custom-dots .dot {
+    width: 28px !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+    background: #ccc !important;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .medical-coverage .custom-slider .custom-dots .dot.active {
+    background: #262965 !important;
+  }
+}
+
+/* ── 6. Fix quote form inputs always showing on mobile ────────── */
+@media (max-width: 767px) {
+  .quote_rates_form {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .quote_rates_form .row {
+    display: flex !important;
+    flex-wrap: wrap;
+    margin: 0 !important;
+  }
+  .quote_rates_form .col-12,
+  .quote_rates_form .col-6 {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .holdrate-fields {
+    display: flex !important;
+    flex-wrap: wrap;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .holdrate-fields .col-12 {
+    display: block !important;
+  }
+}
+
+/* ── 7. AOS — safe override so form never stays hidden ────────── */
+@media (max-width: 991px) {
+  #quote-section[data-aos],
+  .quote-section[data-aos],
+  .quote_rates_form[data-aos],
+  .custom-slider[data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FULL RESPONSIVE FIX BLOCK — All pages, all breakpoints
+   Added to a11.css (main CSS file). No new files created.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── GLOBAL: prevent horizontal overflow on every page ──────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+img,
+video,
+iframe,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── HEADER: correct heights & logo on all screens ─────────────────────── */
+@media (max-width: 576px) {
+  .header,
+  .header-transparent {
+    height: 56px !important;
+    padding: 0 12px;
+  }
+  .header .custom-container,
+  .header-transparent .custom-container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  /* Logo size on very small phones */
+  .header img[alt*="logo"],
+  .header-transparent img[alt*="logo"] {
+    max-height: 38px;
+    width: auto;
+  }
+}
+@media (max-width: 992px) {
+  .header .navbar-brand img,
+  .header-transparent .navbar-brand img {
+    max-height: 44px;
+    width: auto;
+  }
+}
+
+/* ── MOBILE OFFCANVAS MENU: fix overflow & bottom button bar ────────────── */
+@media (max-width: 768px) {
+  .header .offcanvas,
+  .header-transparent .offcanvas {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .header .offcanvas-body,
+  .header-transparent .offcanvas-body {
+    padding: 0 16px 100px 16px !important; /* space for fixed bottom buttons */
+  }
+  .mobile-menu-button {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 1200 !important;
+  }
+}
+
+/* ── HERO SECTION: full-bleed video, content stacks on mobile ──────────── */
+.hero-section {
+  width: 100%;
+  overflow: visible;
+}
+@media (max-width: 576px) {
+  .hero-section .hero-bg {
+    height: auto !important;
+    min-height: 480px !important;
+    padding-bottom: 60px;
+  }
+  .hero-section .hero-p {
+    font-size: 32px !important;
+  }
+  .hero-section .hero-p p {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    text-align: left !important;
+    white-space: normal !important;
+  }
+  .hero-section .banner_buttons {
+    position: static !important;
+    transform: none !important;
+    width: 100% !important;
+    padding: 0 16px;
+    margin-top: 16px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-section .banner_buttons a,
+  .hero-section .banner_buttons button {
+    width: 100% !important;
+    text-align: center;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* watch-video stays hidden on small phones (already hidden via existing CSS) */
+  .hero-section .watch-video-1 {
+    bottom: 6% !important;
+  }
+}
+@media (max-width: 390px) {
+  .hero-section .hero-bg {
+    min-height: 420px !important;
+  }
+  .hero-section .hero-p {
+    font-size: 26px !important;
+  }
+  .hero-section .hero-p p {
+    font-size: 26px !important;
+  }
+}
+
+/* ── STATS SECTION: desktop hidden on mobile — carousel shown ──────────── */
+@media (max-width: 767px) {
+  .stats-section {
+    display: none !important;
+  }
+  .stats-carousel {
+    display: block !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+  .stats-carousel .outer {
+    padding: 20px 0 30px !important;
+  }
+  .stats-carousel .stats-card {
+    max-width: 240px !important;
+    padding: 24px 20px !important;
+    border-radius: 20px !important;
+  }
+  .stats-carousel .stats-owl .stats-card h2 {
+    font-size: 36px !important;
+  }
+  .stats-carousel .stats-owl .stats-card .label {
+    font-size: 14px !important;
+  }
+}
+
+/* ── ABOUT CONTENT: padding fix for mobile stats gap ───────────────────── */
+@media (max-width: 767px) {
+  .about-content {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .about-content p {
+    font-size: clamp(20px, 6vw, 32px) !important;
+  }
+  .about-content h6 {
+    font-size: clamp(16px, 4.5vw, 22px) !important;
+  }
+}
+
+/* ── FULL VIDEO SECTION: correct layout on small screens ───────────────── */
+@media (max-width: 576px) {
+  .full-video-section {
+    padding: 24px 12px !important;
+  }
+  .full-video-section .video-wrapper {
+    border-radius: 20px !important;
+    max-height: 180px !important;
+  }
+}
+
+/* ── MEDICAL COVERAGE SECTION ────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .medical-coverage {
+    overflow: hidden;
+  }
+  .medical-coverage .coverage {
+    padding: 40px 0 !important;
+  }
+  .medical-coverage .med-heading {
+    font-size: clamp(18px, 5vw, 26px) !important;
+    padding: 0 12px;
+  }
+  .medical-coverage .med-title {
+    padding: 0 16px;
+    font-size: 15px !important;
+  }
+  /* Tiles: mobile custom-slider visible */
+  .medical-coverage .custom-slider {
+    max-width: 100% !important;
+    padding: 0 16px;
+  }
+  .medical-coverage .coverage-tiles {
+    padding: 0 16px;
+  }
+}
+@media (max-width: 576px) {
+  .medical-coverage .coverage {
+    padding: 30px 0 !important;
+  }
+  .medical-coverage .custom-modal .help-btn,
+  .medical-coverage .custom-modal .search-btn {
+    width: 100% !important;
+    padding: 12px 16px !important;
+  }
+  .medical-coverage .coverage-tiles .slider-logos {
+    width: 52px !important;
+    height: 48px !important;
+  }
+}
+
+/* ── QUOTE SECTION: all inputs full width on mobile ─────────────────────── */
+@media (max-width: 767px) {
+  .quote-section {
+    padding: 30px 0 !important;
+  }
+  .quote-section .input-card,
+  .quote-section .input-card-1 {
+    height: 50px !important;
+    padding-left: 12px !important;
+  }
+  .quote-section .gender-selection .gender-card {
+    height: 50px !important;
+    padding-left: 14px !important;
+    font-size: 15px !important;
+  }
+  .quote-section .a-q-btn {
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 20px 0 !important;
+  }
+  .quote-section .a-q-btn .agent-btn,
+  .quote-section .a-q-btn .quote-btn {
+    width: 100% !important;
+    height: 52px !important;
+    font-size: 15px !important;
+  }
+  /* holdrate fields stack vertically */
+  .holdrate-fields .col-lg-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .holdrate-fields .input-box {
+    width: 100% !important;
+  }
+  /* disclaimer text */
+  .quote-section .disclaimer-wrapper {
+    padding: 0 4px;
+  }
+  .quote-section .disclaimer-text {
+    font-size: 13px !important;
+    line-height: 1.5;
+  }
+}
+@media (max-width: 390px) {
+  .quote-section .input-card,
+  .quote-section .input-card-1 {
+    height: 44px !important;
+  }
+}
+
+/* ── PRICING SECTION: cards full width on mobile ────────────────────────── */
+@media (max-width: 767px) {
+  .pricing-section .col-md-6,
+  .pricing-section .col-lg-4 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  .pricing-section .price-card-1,
+  .pricing-section .popular-1 {
+    margin-bottom: 16px;
+  }
+}
+
+/* ── TESTIMONIALS: infinite scroll overflow fix ─────────────────────────── */
+@media (max-width: 767px) {
+  .testimonials-section {
+    padding: 32px 0 !important;
+    overflow: hidden;
+  }
+  .testimonials-section .slider {
+    padding: 12px 0 !important;
+  }
+  .testimonials-section .testimonial-card {
+    min-width: 280px !important;
+    max-width: 300px !important;
+    padding: 16px !important;
+    border-radius: 20px !important;
+  }
+  .testimonials-section h2 {
+    font-size: 21px !important;
+    padding: 0 16px;
+  }
+  .testimonials-section .test-sub-title {
+    font-size: clamp(16px, 4.5vw, 22px) !important;
+    padding: 0 16px;
+  }
+}
+
+/* ── NETWORK / LOGOS SECTION ────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .network-section {
+    padding: 32px 0 !important;
+    overflow: hidden;
+  }
+  .network-section h2 {
+    font-size: 18px !important;
+    padding: 0 16px;
+    text-align: center;
+  }
+  .network-section .logos-slider-wrapper {
+    overflow: hidden;
+  }
+}
+
+/* ── JOIN SOLO / HOW IT WORKS SECTION ──────────────────────────────────── */
+@media (max-width: 767px) {
+  .join-solo-section,
+  section[class*="join"],
+  section[class*="how-it-works"] {
+    padding: 32px 0 !important;
+  }
+  .join-solo-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+  }
+}
+@media (max-width: 576px) {
+  .join-solo-image {
+    max-height: 260px !important;
+  }
+}
+
+/* ── FAQ SECTION ────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .faq-section {
+    padding: 32px 0 !important;
+  }
+  .faq-section h2 {
+    font-size: 21px !important;
+    text-align: center;
+    padding: 0 16px;
+  }
+  .faq-section .faq-question {
+    font-size: 15px !important;
+    line-height: 1.4;
+    padding: 14px 16px !important;
+    white-space: normal !important;
+  }
+  .faq-section .faq-answer {
+    font-size: 14px !important;
+    line-height: 1.6;
+    padding: 12px 16px !important;
+  }
+  .faq-section .faq-cta {
+    text-align: center;
+    font-size: 14px !important;
+    padding: 12px !important;
+  }
+  .faq-section .faq-btn {
+    width: 100% !important;
+    max-width: 320px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+/* ── ACCORDION (FAQ) button text wrapping ────────────────────────────────── */
+@media (max-width: 576px) {
+  .accordion-button {
+    white-space: normal !important;
+    word-break: break-word;
+    font-size: 14px !important;
+    padding: 12px 16px !important;
+    padding-right: 40px !important; /* space for chevron */
+  }
+  .accordion-button::after {
+    flex-shrink: 0;
+  }
+}
+
+/* ── BOTTOM DROPDOWN (plan summary) width fix ───────────────────────────── */
+@media (max-width: 390px) {
+  .bottom-dropdown {
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+}
+
+/* ── POPUP MODALS: full screen on small phones ──────────────────────────── */
+@media (max-width: 576px) {
+  .modal-backdrop-overlay {
+    padding: 8px !important;
+    align-items: flex-end !important;
+  }
+  .modal-backdrop-overlay .custom-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 95vh !important;
+    overflow-y: auto;
+  }
+  .mobile-quote .custom-modal {
+    border-radius: 20px 20px 0 0 !important;
+    max-height: 95vh !important;
+    overflow-y: auto;
+  }
+  .mobile-quote .custom-modal .gender-card {
+    padding: 12px 10px !important;
+  }
+  .mobile-quote .custom-modal .help-btn,
+  .mobile-quote .custom-modal .search-btn {
+    width: 100% !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* ── STEPPER SIDEBAR: full-width on tablet ──────────────────────────────── */
+@media (max-width: 991px) {
+  .steeper-section-left-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    border-right: none !important;
+    border-bottom: 1px solid #C7CAFF;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  .steeper-section-left-wrapper .sidebar-steps {
+    overflow-x: auto;
+  }
+}
+
+/* ── INPUT DESIGN: fix fixed-width inputs overflowing ───────────────────── */
+@media (max-width: 767px) {
+  .input-design {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex-wrap: wrap;
+  }
+  .input-box {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ── NOTIFICATION BAR: correct sticky top offset on mobile ──────────────── */
+@media (max-width: 768px) {
+  .notification {
+    top: 56px !important; /* matches mobile header height */
+    font-size: 13px;
+  }
+  .notification .custom-container {
+    padding: 0 12px;
+  }
+}
+
+/* ── GENERAL SECTION PADDING RESET for tiny phones ─────────────────────── */
+@media (max-width: 390px) {
+  .custom-container {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  section {
+    overflow-x: hidden;
+  }
+}
+
+/* ── TYPOGRAPHY: prevent large clamped text from overflowing ─────────────── */
+@media (max-width: 576px) {
+  .fs-65 {
+    font-size: clamp(20px, 7vw, 36px) !important;
+  }
+  .fs-54 {
+    font-size: clamp(22px, 6.5vw, 32px) !important;
+  }
+  .fs-48 {
+    font-size: clamp(24px, 7vw, 36px) !important;
+  }
+  .fs-45 {
+    font-size: clamp(22px, 6vw, 32px) !important;
+  }
+  .fs-130 {
+    font-size: clamp(36px, 12vw, 80px) !important;
+  }
+}
+
+/* ── BUTTON / CTA: always touchable on mobile ───────────────────────────── */
+@media (max-width: 767px) {
+  a,
+  button {
+    min-height: 44px; /* WCAG touch target */
+  }
+  .start-btn,
+  .view-btn,
+  .faq-btn,
+  .quote-btn,
+  .agent-btn,
+  .help-btn,
+  .search-btn {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── PLAN CARDS / PRICING: no horizontal scroll ─────────────────────────── */
+@media (max-width: 767px) {
+  .quote-plans,
+  .plan1,
+  .plan2,
+  .plan3 {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+}
+
+/* ── D-BLOCK-1 / M-BLOCK visibility helpers ────────────────────────────── */
+@media (max-width: 767px) {
+  .d-block-1 {
+    display: block !important;
+  }
+  .m-block {
+    display: none !important;
+  }
+  .d-none-mobile {
+    display: none !important;
+  }
+  .d-block-mobile {
+    display: block !important;
+  }
+}
+
+/* ── FULLSCREEN VIDEO on mobile: stable layout ──────────────────────────── */
+@media (max-width: 576px) {
+  .fullscreen-video .close-btn {
+    bottom: 20px !important;
+    right: 20px !important;
+    transform: none !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* ── GRID COLUMNS: ensure they never overflow on phones ─────────────────── */
+@media (max-width: 767px) {
+  [class*="col-lg"],
+  [class*="col-md"] {
+    max-width: 100%;
+  }
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* ── SOLO BANNER TEXT: wrap cleanly on small devices ────────────────────── */
+@media (max-width: 576px) {
+  .solo-banner {
+    font-size: 13px !important;
+    text-align: center;
+    padding: 8px 12px;
+  }
+  .solo-banner a {
+    white-space: nowrap;
+  }
+}
+
+/* ── THANK YOU / UTILITY BUTTONS ────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .thank-you-btn-section .btn-one,
+  .thank-you-btn-section .btn-two {
+    width: 100% !important;
+    max-width: 320px;
+    height: 52px !important;
+  }
+  .thank-you-btn-section {
+    flex-direction: column !important;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+/* ── STEPPER DETAILS PANEL (mobile fixed overlay) ───────────────────────── */
+@media (max-width: 576px) {
+  .stepper-details {
+    padding: 0 12px 12px 12px !important;
+  }
+  .steps-mobile {
+    padding: 14px 12px !important;
+  }
+  .steps-mobile .step-mobile .circle {
+    width: 22px !important;
+    height: 22px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* ── CARDS / TILES: no fixed heights that clip content ──────────────────── */
+@media (max-width: 576px) {
+  .stats-carousel .stats-card {
+    height: auto !important;
+    min-height: 180px !important;
+  }
+}
+
+/* ── ABOUT PAGE / BREADCRUMBS ───────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .breadcrumbs,
+  .breadcrumbs-about-us {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px !important;
+  }
+  .breadcrumbs a,
+  .breadcrumbs span,
+  .breadcrumbs-about-us a,
+  .breadcrumbs-about-us span {
+    font-size: 13px !important;
+  }
+}
+
+/* ── SPOUSE / FAMILY FORM: popup buttons stacked on mobile ──────────────── */
+@media (max-width: 576px) {
+  .medical-coverage .custom-modal .popup-button,
+  .mobile-quote .custom-modal .popup-button,
+  .modal-backdrop-overlay .custom-modal .popup-button {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .medical-coverage .custom-modal .popup-button .help-btn,
+  .medical-coverage .custom-modal .popup-button .search-btn,
+  .mobile-quote .custom-modal .popup-button .help-btn,
+  .mobile-quote .custom-modal .popup-button .search-btn,
+  .modal-backdrop-overlay .custom-modal .popup-button .help-btn,
+  .modal-backdrop-overlay .custom-modal .popup-button .search-btn {
+    width: 100% !important;
+  }
+  /* gender card spacing */
+  .medical-coverage .custom-modal .gender-card,
+  .modal-backdrop-overlay .custom-modal .gender-card {
+    padding: 12px 10px !important;
+  }
+}
+
+/* ── OWL CAROUSEL DOTS: visible & properly sized on all devices ─────────── */
+@media (max-width: 767px) {
+  .owl-dots {
+    display: flex !important;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 12px;
+  }
+  .owl-dot span {
+    width: 24px !important;
+    height: 4px !important;
+    border-radius: 2px !important;
+    background: #c7caff !important;
+    display: block;
+  }
+  .owl-dot.active span {
+    background: #262965 !important;
+  }
+}
+
+/* ── TABLET (768–991px) FINE-TUNING ────────────────────────────────────── */
+@media (min-width: 768px) and (max-width: 991px) {
+  .hero-section .hero-bg {
+    height: auto !important;
+    min-height: 600px !important;
+    padding-bottom: 80px;
+  }
+  .hero-section .hero-p {
+    font-size: 72px !important;
+  }
+  .hero-section .hero-p p {
+    line-height: 1.1 !important;
+  }
+  .about-content {
+    padding-top: 100px !important;
+    padding-bottom: 60px !important;
+  }
+  .stats-section {
+    display: none !important;
+  }
+  .stats-carousel {
+    display: block !important;
+  }
+  .join-solo-image {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px !important;
+    object-fit: contain;
+  }
+  .quote-section .a-q-btn {
+    gap: 16px !important;
+  }
+}
+
+/* ── 1024px LAPTOP FINE-TUNING ─────────────────────────────────────────── */
+@media (min-width: 992px) and (max-width: 1024px) {
+  .stats-section {
+    display: block !important;
+  }
+  .stats-carousel {
+    display: none !important;
+  }
+  .about-content {
+    padding-top: 190px !important;
+  }
+}
+
+/* ── SAFE AOS OVERRIDE: never let AOS permanently hide content ──────────── */
+@media (max-width: 991px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    pointer-events: auto !important;
+    visibility: visible !important;
+  }
+  /* Re-enable on desktop (where AOS should animate normally) */
 }
