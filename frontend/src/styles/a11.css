@@ -25802,3 +25802,80 @@ svg {
   }
   /* Re-enable on desktop (where AOS should animate normally) */
 }
+
+/* Ensure the outer box is a flex container and relative */
+.input-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 64px; /* Fixed height helps with centering */
+  transition: all 0.3s ease;
+}
+
+/* Center the icon vertically */
+.input-box .icon {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+/* The field container takes up remaining space */
+.input-field {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* The actual Input Styling */
+.input-text {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding-top: 12px; /* Leaves room for the label when it floats up */
+  font-size: 16px;
+  color: #262965;
+}
+
+/* The Label (Placeholder) - Centered by default */
+.custom-input-label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #718096;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  pointer-events: none; /* Allows clicking "through" the label to the input */
+}
+
+/* Floating behavior: When input is focused or has content */
+.input-text:focus + .custom-input-label,
+.input-text:not(:placeholder-shown) + .custom-input-label,
+.input-text:valid + .custom-input-label {
+  top: 18px; /* Moves to the top */
+  font-size: 12px;
+  color: #718096;
+}
+
+/* Handle Textarea specifically */
+.textarea-box {
+  height: auto;
+  align-items: flex-start;
+  padding-top: 12px;
+}
+
+.textarea-box .input-text {
+  padding-top: 16px;
+}
+
+.textarea-box .custom-input-label {
+  top: 28px;
+}

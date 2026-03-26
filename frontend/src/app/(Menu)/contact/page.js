@@ -176,7 +176,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="firstname" value={feedbackData.firstname} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="text" required />
+                                    <input name="firstname" value={feedbackData.firstname} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="text" placeholder=" " required />
                                     <label className="custom-input-label">First Name</label>
                                   </div>
                                 </div>
@@ -187,7 +187,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="lastname" value={feedbackData.lastname} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="text" required />
+                                    <input name="lastname" value={feedbackData.lastname} onChange={(e) => handleInputChange(e, "feedback")} placeholder=" " className="input-text" type="text" required />
                                     <label className="custom-input-label">Last Name</label>
                                   </div>
                                 </div>
@@ -198,7 +198,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="email" value={feedbackData.email} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="email" required />
+                                    <input name="email" value={feedbackData.email} onChange={(e) => handleInputChange(e, "feedback")} placeholder=" " className="input-text" type="email" required />
                                     <label className="custom-input-label">Email</label>
                                   </div>
                                 </div>
@@ -209,7 +209,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="telephone" value={feedbackData.telephone} onChange={(e) => handleInputChange(e, "feedback")} className="input-text" type="tel" />
+                                    <input name="telephone" value={feedbackData.telephone} onChange={(e) => handleInputChange(e, "feedback")} placeholder=" " className="input-text" type="tel" />
                                     <label className="custom-input-label">Phone</label>
                                   </div>
                                 </div>
@@ -256,7 +256,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="company" value={partnerData.company} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="text" />
+                                    <input name="company" value={partnerData.company} onChange={(e) => handleInputChange(e, "partner")} placeholder=" " className="input-text" type="text" />
                                     <label className="custom-input-label">Company Name</label>
                                   </div>
                                 </div>
@@ -267,7 +267,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="name" value={partnerData.name} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="text" required />
+                                    <input name="name" value={partnerData.name} onChange={(e) => handleInputChange(e, "partner")} placeholder=" " className="input-text" type="text" required />
                                     <label className="custom-input-label">Name</label>
                                   </div>
                                 </div>
@@ -278,7 +278,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="email" value={partnerData.email} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="email" required />
+                                    <input name="email" value={partnerData.email} onChange={(e) => handleInputChange(e, "partner")} placeholder=" " className="input-text" type="email" required />
                                     <label className="custom-input-label">Email</label>
                                   </div>
                                 </div>
@@ -289,7 +289,7 @@ export default function ContactPage() {
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 5H14C14.5523 5 15 5.44772 15 6V7H17V6C17 4.34315 15.6569 3 14 3H6C4.34315 3 3 4.34315 3 6V14C3 15.6569 4.34315 17 6 17H7V15H6C5.44772 15 5 14.5523 5 14V6C5 5.44772 5.44772 5 6 5Z" fill="#262965" /><path fillRule="evenodd" clipRule="evenodd" d="M18 9H10C9.44772 9 9 9.44772 9 10V18C9 18.5523 9.44772 19 10 19H18C18.5523 19 19 18.5523 19 18V10C19 9.44772 18.5523 9 18 9ZM10 7C8.34315 7 7 8.34315 7 10V18C7 19.6569 8.34315 21 10 21H18C19.6569 21 21 19.6569 21 18V10C21 8.34315 19.6569 7 18 7H10Z" fill="#262965" /></svg>
                                   </div>
                                   <div className="input-field">
-                                    <input name="telephone" value={partnerData.telephone} onChange={(e) => handleInputChange(e, "partner")} className="input-text" type="tel" />
+                                    <input name="telephone" value={partnerData.telephone} onChange={(e) => handleInputChange(e, "partner")} placeholder=" " className="input-text" type="tel" />
                                     <label className="custom-input-label">Phone</label>
                                   </div>
                                 </div>
