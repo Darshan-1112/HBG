@@ -1,0 +1,4 @@
+frontend.zip 
+*.zip 
+node_modules/ 
+.next/ 
